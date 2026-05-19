@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agentic26 | Descúbrete+</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --naranja: #F26522;
+      --azul: #1B3A6B;
+      --dorado: #B8956A;
+      --fondo: #FAFAFA;
+      --fondo-2: #F4F4F5;
+      --negro: #09090B;
+      --gris-1: #71717A;
+      --gris-2: #A1A1AA;
+      --borde: #E4E4E7;
+      --blanco: #FFFFFF;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--fondo); color: var(--negro); overflow-x: hidden; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 2.5rem; height: 64px; background: rgba(250,250,250,0.88); backdrop-filter: blur(20px); border-bottom: 1px solid var(--borde); }
+    .nav-logo img { height: 40px; width: auto; }
+    .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+    .nav-links a { text-decoration: none; font-size: 0.82rem; font-weight: 450; color: var(--gris-1); transition: color 0.15s; letter-spacing: -0.01em; }
+    .nav-links a:hover, .nav-links a.active { color: var(--negro); }
+    .nav-cta { background: var(--negro) !important; color: white !important; padding: 0.5rem 1.2rem !important; border-radius: 6px; font-weight: 500 !important; }
+    .nav-cta:hover { opacity: 0.8; }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 8rem 2rem 5rem;
+      background: var(--negro); position: relative; overflow: hidden;
+    }
+    #hero::before {
+      content: ''; position: absolute; top: -200px; left: 50%;
+      transform: translateX(-50%); width: 800px; height: 800px;
+      background: radial-gradient(circle, rgba(242,101,34,0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(242,101,34,0.08); border: 1px solid rgba(242,101,34,0.18); padding: 0.35rem 0.9rem; border-radius: 100px; font-size: 0.72rem; font-weight: 500; color: var(--naranja); margin-bottom: 2.5rem; opacity: 0; animation: fade-up 0.6s ease 0.1s forwards; }
+    .badge-dot { width: 6px; height: 6px; background: var(--naranja); border-radius: 50%; animation: pulse 2s ease infinite; }
+    @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.4; } }
+    .hero-title { font-family: 'DM Serif Display', serif; font-size: clamp(2.5rem, 5.5vw, 5rem); font-weight: 400; line-height: 1.1; letter-spacing: -0.03em; color: white; max-width: 820px; margin-bottom: 1.8rem; opacity: 0; animation: fade-up 0.6s ease 0.2s forwards; position: relative; z-index: 1; }
+    .hero-title em { font-style: italic; color: var(--naranja); }
+    .hero-subtitle { font-size: 1rem; color: rgba(255,255,255,0.5); max-width: 560px; line-height: 1.7; margin-bottom: 3rem; opacity: 0; animation: fade-up 0.6s ease 0.3s forwards; letter-spacing: -0.01em; position: relative; z-index: 1; }
+    .hero-buttons { display: flex; gap: 0.8rem; flex-wrap: wrap; justify-content: center; opacity: 0; animation: fade-up 0.6s ease 0.4s forwards; position: relative; z-index: 1; margin-bottom: 5rem; }
+    .btn-orange { background: var(--naranja); color: white; padding: 0.75rem 1.8rem; border-radius: 8px; font-size: 0.85rem; font-weight: 500; text-decoration: none; transition: opacity 0.15s; letter-spacing: -0.01em; display: inline-block; }
+    .btn-orange:hover { opacity: 0.85; }
+    .btn-ghost { background: transparent; color: rgba(255,255,255,0.6); padding: 0.75rem 1.8rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); font-size: 0.85rem; font-weight: 500; text-decoration: none; transition: all 0.15s; letter-spacing: -0.01em; display: inline-block; }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.25); color: white; }
+    .hero-tags { display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; opacity: 0; animation: fade-up 0.6s ease 0.5s forwards; position: relative; z-index: 1; padding-top: 3.5rem; border-top: 1px solid rgba(255,255,255,0.06); width: 100%; max-width: 700px; }
+    .hero-tag { padding: 0.5rem 1rem; border: 1px solid rgba(255,255,255,0.07); border-radius: 100px; font-size: 0.76rem; color: rgba(255,255,255,0.35); letter-spacing: -0.01em; transition: all 0.2s; }
+    .hero-tag:hover { border-color: rgba(242,101,34,0.25); color: rgba(255,255,255,0.6); }
+    @keyframes fade-up { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+
+    /* SECTIONS */
+    .section-label { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gris-2); margin-bottom: 1rem; display: block; }
+    hr.divider { border: none; border-top: 1px solid var(--borde); }
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: 0.1s; } .d2 { transition-delay: 0.2s; } .d3 { transition-delay: 0.3s; } .d4 { transition-delay: 0.4s; } .d5 { transition-delay: 0.5s; }
+
+    /* PARA QUIEN */
+    #para-quien { background: var(--blanco); padding: 7rem 2.5rem; }
+    .para-quien-inner { max-width: 900px; margin: 0 auto; }
+    .para-quien-inner h2 { font-family: 'DM Serif Display', serif; font-size: clamp(1.8rem, 3.5vw, 3rem); font-weight: 400; line-height: 1.2; letter-spacing: -0.03em; margin-bottom: 1.5rem; }
+    .para-quien-inner h2 em { font-style: italic; color: var(--naranja); }
+    .para-quien-inner p { font-size: 0.95rem; color: var(--gris-1); line-height: 1.8; margin-bottom: 1rem; letter-spacing: -0.01em; }
+    .riesgo-box { background: var(--fondo-2); border: 1px solid var(--borde); border-left: 3px solid var(--naranja); padding: 1.5rem 2rem; margin: 2rem 0; border-radius: 0 8px 8px 0; }
+    .riesgo-box p { font-size: 0.9rem; color: var(--negro); font-weight: 500; margin: 0; line-height: 1.7; }
+    .btn-dorado { background: var(--dorado); color: white; padding: 0.75rem 1.8rem; border-radius: 8px; font-size: 0.85rem; font-weight: 500; text-decoration: none; transition: opacity 0.15s; letter-spacing: -0.01em; display: inline-block; margin-top: 1rem; }
+    .btn-dorado:hover { opacity: 0.85; }
+
+    /* SPEAKERS */
+    #speakers { background: var(--fondo); padding: 7rem 2.5rem; border-top: 1px solid var(--borde); }
+    .speakers-inner { max-width: 1100px; margin: 0 auto; }
+    .speakers-inner h2 { font-family: 'DM Serif Display', serif; font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 400; letter-spacing: -0.03em; margin-bottom: 0.5rem; }
+    .speakers-inner h2 em { font-style: italic; color: var(--naranja); }
+    .universities { display: flex; gap: 2rem; margin: 1rem 0 3rem; }
+    .uni-tag { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: var(--dorado); font-style: italic; }
+    .speakers-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    .speaker-card { background: var(--blanco); border: 1px solid var(--borde); border-radius: 14px; padding: 2rem; transition: box-shadow 0.2s, transform 0.2s; }
+    .speaker-card:hover { box-shadow: 0 10px 35px rgba(0,0,0,0.06); transform: translateY(-3px); }
+    .speaker-name { font-family: 'DM Serif Display', serif; font-size: 1.4rem; font-weight: 400; color: var(--negro); margin-bottom: 0.2rem; letter-spacing: -0.02em; }
+    .speaker-title { font-size: 0.78rem; color: var(--naranja); font-weight: 500; letter-spacing: -0.01em; margin-bottom: 1rem; }
+    .speaker-desc { font-size: 0.85rem; color: var(--gris-1); line-height: 1.7; letter-spacing: -0.01em; margin-bottom: 1.2rem; }
+    .speaker-quote { font-family: 'DM Serif Display', serif; font-size: 1rem; font-style: italic; color: var(--negro); border-left: 2px solid var(--naranja); padding-left: 1rem; line-height: 1.6; }
+
+    /* INSIGHTS SECTION - DARK */
+    #insights { background: var(--negro); padding: 7rem 2.5rem; }
+    .insights-inner { max-width: 1100px; margin: 0 auto; }
+    .insights-inner h2 { font-family: 'DM Serif Display', serif; font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 400; letter-spacing: -0.03em; color: white; margin-bottom: 0.5rem; }
+    .insights-inner h2 em { font-style: italic; color: var(--naranja); }
+    .insights-inner > p { font-size: 0.88rem; color: rgba(255,255,255,0.45); margin-bottom: 3rem; letter-spacing: -0.01em; }
+    .insights-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 3rem; }
+    .insight-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; padding: 1.8rem; transition: background 0.2s; }
+    .insight-card:hover { background: rgba(255,255,255,0.07); }
+    .insight-name { font-size: 0.78rem; font-weight: 600; color: rgba(255,255,255,0.5); letter-spacing: -0.01em; margin-bottom: 0.8rem; }
+    .insight-quote { font-family: 'DM Serif Display', serif; font-size: 0.95rem; font-style: italic; color: white; line-height: 1.6; }
+
+    /* KEY INSIGHTS */
+    #key-insights { background: var(--negro); padding: 0 2.5rem 7rem; }
+    .key-inner { max-width: 900px; margin: 0 auto; }
+    .key-inner h2 { font-family: 'DM Serif Display', serif; font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 400; letter-spacing: -0.03em; color: white; margin-bottom: 3rem; text-align: center; }
+    .key-inner h2 em { font-style: italic; color: var(--naranja); }
+    .quotes-list { display: flex; flex-direction: column; gap: 2rem; margin-bottom: 3rem; }
+    .big-quote { border-left: 2px solid var(--dorado); padding-left: 2rem; }
+    .big-quote blockquote { font-family: 'DM Serif Display', serif; font-size: clamp(1.1rem, 2vw, 1.4rem); font-style: italic; color: white; line-height: 1.5; margin-bottom: 0.5rem; }
+    .big-quote cite { font-size: 0.76rem; color: var(--dorado); font-style: normal; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
+    .cta-center { text-align: center; }
+    .btn-dorado-outline { background: transparent; color: var(--dorado); padding: 0.75rem 1.8rem; border-radius: 8px; border: 1px solid rgba(184,149,106,0.4); font-size: 0.85rem; font-weight: 500; text-decoration: none; transition: all 0.15s; letter-spacing: -0.01em; display: inline-block; margin: 0.4rem; }
+    .btn-dorado-outline:hover { border-color: var(--dorado); background: rgba(184,149,106,0.08); }
+    .btn-dorado-filled { background: var(--dorado); color: white; padding: 0.75rem 1.8rem; border-radius: 8px; font-size: 0.85rem; font-weight: 500; text-decoration: none; transition: opacity 0.15s; letter-spacing: -0.01em; display: inline-block; margin: 0.4rem; }
+    .btn-dorado-filled:hover { opacity: 0.85; }
+
+    /* RESULTADOS */
+    #resultados { background: var(--negro); padding: 0 2.5rem 7rem; border-top: 1px solid rgba(255,255,255,0.06); }
+    .resultados-inner { max-width: 900px; margin: 0 auto; padding-top: 5rem; }
+    .resultados-inner h2 { font-family: 'DM Serif Display', serif; font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 400; letter-spacing: -0.03em; color: white; margin-bottom: 0.5rem; }
+    .resultados-inner h2 em { font-style: italic; color: var(--naranja); }
+    .resultados-inner > p { font-size: 0.88rem; color: rgba(255,255,255,0.4); margin-bottom: 1rem; }
+    .manifesto { font-family: 'DM Serif Display', serif; font-size: clamp(1.3rem, 2.5vw, 1.8rem); font-weight: 400; color: white; line-height: 1.4; letter-spacing: -0.02em; margin: 2.5rem 0; text-align: center; padding: 2.5rem; border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; }
+    .manifesto em { font-style: italic; color: var(--dorado); }
+    .resultados-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; }
+    .resultados-list li { display: flex; gap: 1rem; align-items: flex-start; font-size: 0.88rem; color: rgba(255,255,255,0.6); line-height: 1.6; letter-spacing: -0.01em; }
+    .resultados-list li::before { content: '→'; color: var(--naranja); flex-shrink: 0; font-weight: 600; }
+
+    /* CTA FINAL */
+    #cta-final { background: var(--blanco); padding: 7rem 2.5rem; border-top: 1px solid var(--borde); text-align: center; }
+    #cta-final h2 { font-family: 'DM Serif Display', serif; font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 400; letter-spacing: -0.03em; color: var(--negro); margin-bottom: 1rem; max-width: 700px; margin-left: auto; margin-right: auto; }
+    #cta-final h2 em { font-style: italic; color: var(--naranja); }
+    #cta-final p { font-size: 0.92rem; color: var(--gris-1); margin-bottom: 2.5rem; letter-spacing: -0.01em; }
+    .btn-dark { background: var(--negro); color: white; padding: 0.75rem 1.8rem; border-radius: 8px; font-size: 0.85rem; font-weight: 500; text-decoration: none; transition: opacity 0.15s; letter-spacing: -0.01em; display: inline-block; margin: 0.4rem; }
+    .btn-dark:hover { opacity: 0.8; }
+    .btn-light { background: var(--blanco); color: var(--negro); padding: 0.75rem 1.8rem; border-radius: 8px; border: 1px solid var(--borde); font-size: 0.85rem; font-weight: 500; text-decoration: none; transition: background 0.15s; letter-spacing: -0.01em; display: inline-block; margin: 0.4rem; }
+    .btn-light:hover { background: var(--fondo-2); }
+
+    /* FOOTER */
+    footer { background: var(--negro); padding: 3rem 2.5rem; }
+    .footer-top { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; margin-bottom: 2rem; }
+    .footer-logo img { height: 32px; width: auto; filter: brightness(10); opacity: 0.55; }
+    .footer-links { display: flex; gap: 2rem; list-style: none; }
+    .footer-links a { color: rgba(255,255,255,0.3); text-decoration: none; font-size: 0.76rem; transition: color 0.15s; }
+    .footer-links a:hover { color: rgba(255,255,255,0.6); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.05); padding-top: 1.5rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+    .footer-bottom p { font-size: 0.7rem; color: rgba(255,255,255,0.2); }
+    .footer-email a { color: var(--naranja); text-decoration: none; font-size: 0.76rem; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      nav { padding: 0 1.5rem; }
+      #hero, #para-quien, #speakers, #insights, #key-insights, #resultados, #cta-final { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .speakers-grid { grid-template-columns: 1fr; }
+      .insights-grid { grid-template-columns: 1fr; }
+      footer { padding: 2rem 1.5rem; }
+      .footer-top { flex-direction: column; }
+      .footer-bottom { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-logo"><img src="images/logo.png" alt="Descúbrete+"></div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="programas.html">Programas</a></li>
+      <li><a href="agentic.html" class="active" style="color:var(--negro);">Agentic</a></li>
+      <li><a href="nosotros.html">Nosotros</a></li>
+      <li><a href="contacto.html" class="nav-cta">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-badge"><span class="badge-dot"></span>AGENTIC26 — Querétaro, México</div>
+    <h1 class="hero-title">La AI Agéntica<br>está <em>aquí</em></h1>
+    <p class="hero-subtitle">Para quienes ya están decidiendo con criterio en un entorno donde la IA ya actúa sola.</p>
+    <div class="hero-buttons">
+      <a href="contacto.html" class="btn-orange">Definir programa a la medida</a>
+      <a href="#speakers" class="btn-ghost">Conocer los speakers →</a>
+    </div>
+    <div class="hero-tags">
+      <span class="hero-tag">Inteligencia Artificial</span>
+      <span class="hero-tag">Liderazgo</span>
+      <span class="hero-tag">Toma de decisiones</span>
+      <span class="hero-tag">Harvard · MIT · Stanford</span>
+      <span class="hero-tag">Criterio antes que adopción</span>
+    </div>
+  </section>
+
+  <!-- PARA QUIEN -->
+  <section id="para-quien">
+    <div class="para-quien-inner">
+      <div class="reveal">
+        <span class="section-label">¿Para quién?</span>
+        <h2>Para quienes ya están <em>decidiendo con criterio</em><br>en un entorno donde la IA ya actúa sola</h2>
+      </div>
+      <div class="reveal">
+        <p>Hoy no se trata solo de herramientas. Se trata de criterio, arquitectura y responsabilidad. Y esa conversación apenas está empezando.</p>
+        <p>Sí, esto implica nuevos retos en liderazgo, gobernanza, talento, ética y diseño organizacional.</p>
+        <div class="riesgo-box">
+          <p>→ Resultados claros para líderes que deciden. La ventaja no está en usar la IA "mas impresionante". La mayoría de las empresas cree que tiene un problema de adopción de IA. En realidad, tiene un problema de criterio.</p>
+        </div>
+        <div class="riesgo-box" style="margin-top: 1rem; border-left-color: var(--azul);">
+          <p>→ Aquí, el riesgo no es técnico, es de visión: operar con modelos obsoletos mientras la competencia automatiza la toma de decisiones.</p>
+        </div>
+        <a href="contacto.html" class="btn-dorado">Definir programa a la medida</a>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- SPEAKERS -->
+  <section id="speakers">
+    <div class="speakers-inner">
+      <div class="reveal">
+        <span class="section-label">En tu empresa</span>
+        <h2>No hablamos de expertos.<br>Hablamos de <em>frontera del conocimiento</em></h2>
+        <div class="universities">
+          <span class="uni-tag">Harvard</span>
+          <span class="uni-tag">MIT</span>
+          <span class="uni-tag">Stanford</span>
+        </div>
+        <p style="font-size:0.88rem; color:var(--gris-1); margin-bottom:3rem; letter-spacing:-0.01em;">Del ruido a la claridad estratégica desde una perspectiva ejecutiva, aplicada y responsable.</p>
+      </div>
+      <div class="speakers-grid">
+
+        <div class="speaker-card reveal d1">
+          <div class="speaker-name">Shuya Gong</div>
+          <div class="speaker-title">Innovación en Diseño y Futuros de la IA — Harvard Engineering / ex-IDEO CoLab Ventures</div>
+          <p class="speaker-desc">Intersección entre diseño, tecnología y futuros posibles. Su intervención no fue una explicación técnica — fue una advertencia estratégica sobre la estructura, los límites y las decisiones que una organización debe diseñar antes de entregar autonomía.</p>
+          <blockquote class="speaker-quote">"El verdadero riesgo no es lo que un agente hace. Es a qué le vas a dar acceso."</blockquote>
+          <p style="font-size:0.8rem; color:var(--gris-2); margin-top:1rem; font-style:italic;">"Vivir procesos con ella es anticiparse 5 años a la competencia"</p>
+        </div>
+
+        <div class="speaker-card reveal d2">
+          <div class="speaker-name">Javier Weddington</div>
+          <div class="speaker-title">PhD (c) en Neurociencias por Stanford y Bio-X Bowes Fellow — Referente en Neurociencia Computacional e IA</div>
+          <p class="speaker-desc">Una exploración rigurosa sobre los fundamentos de la inteligencia artificial, sus límites y lo que realmente implica construir sistemas capaces de interactuar con el mundo. Pionero en IA Agéntica Real: No le damos instrucciones; le damos un objetivo.</p>
+          <blockquote class="speaker-quote">"El error no siempre está en el modelo. A veces está en la forma en que una empresa formuló el problema."</blockquote>
+        </div>
+
+        <div class="speaker-card reveal d3">
+          <div class="speaker-name">Héctor Hernández</div>
+          <div class="speaker-title">Founder & CEO Descúbrete+ — Estrategia en integración de IA en organizaciones</div>
+          <p class="speaker-desc">Empresario, speaker y estratega en transformación empresarial. Traduce una transición tecnológica en decisiones humanas, empresariales y estratégicas. Es la persona que conecta IA con criterio, estructura, gobernanza y ventaja operativa.</p>
+          <blockquote class="speaker-quote">"No toda empresa necesita más IA. Muchas necesitan una mejor forma de pensar antes de automatizar."</blockquote>
+        </div>
+
+        <div class="speaker-card reveal d4">
+          <div class="speaker-name">Pablo Cáceres</div>
+          <div class="speaker-title">Conferencista y experto en decisiones de alto impacto</div>
+          <p class="speaker-desc">Experto en cómo las organizaciones toman decisiones de alto impacto en entornos de incertidumbre. Su perspectiva une el criterio humano con las nuevas capacidades de la IA agéntica.</p>
+          <blockquote class="speaker-quote">"Claridad antes que adopción. Criterio antes que capacidad."</blockquote>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- INDUSTRY INSIGHTS -->
+  <section id="insights">
+    <div class="insights-inner">
+      <div class="reveal">
+        <span class="section-label" style="color:rgba(255,255,255,0.3);">La economía de la IA</span>
+        <h2>Industry <em>Insights</em></h2>
+        <p>Lo que los líderes globales ya están diciendo — y actuando.</p>
+      </div>
+      <div class="insights-grid">
+        <div class="insight-card reveal d1">
+          <div class="insight-name">Chuck Robbins — CEO de Cisco</div>
+          <blockquote class="insight-quote">"El 2026 no es solo otro año para la tecnología, es el punto de inflexión. Estamos pasando de la experimentación a la era de la 'IA Agéntica'."</blockquote>
+        </div>
+        <div class="insight-card reveal d2">
+          <div class="insight-name">Jensen Huang — CEO de NVIDIA</div>
+          <blockquote class="insight-quote">"No vas a perder tu trabajo por la IA; vas a perderlo frente a alguien que use la IA."</blockquote>
+        </div>
+        <div class="insight-card reveal d3">
+          <div class="insight-name">Jeetu Patel — Chief Product Officer, Cisco</div>
+          <blockquote class="insight-quote">"Si no puedes confiar en el sistema, no lo usarás. La seguridad ya no es una capa extra, es el cimiento de la adopción de la IA."</blockquote>
+        </div>
+        <div class="insight-card reveal d1">
+          <div class="insight-name">Sam Altman — CEO de OpenAI</div>
+          <blockquote class="insight-quote">"Las empresas que no estén preparadas para adoptar 'trabajadores de IA' rápidamente estarán en una desventaja masiva."</blockquote>
+        </div>
+        <div class="insight-card reveal d2">
+          <div class="insight-name">Jeetu Patel — Chief Product Officer, Cisco</div>
+          <blockquote class="insight-quote">"Pasar de los 'chatbots' a los 'agentes autónomos' no es una mejora incremental, es un cambio total de modelo operativo."</blockquote>
+        </div>
+        <div class="insight-card reveal d3">
+          <div class="insight-name">Empresas globales</div>
+          <blockquote class="insight-quote">"Nasdaq y Fidelity, rediseñando la confianza en sistemas descentralizados. Target y H&M, explorando la economía circular y la IA aplicada a la logística."</blockquote>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KEY INSIGHTS / QUOTES -->
+  <section id="key-insights">
+    <div class="key-inner">
+      <h2 class="reveal">Paso adelante<br><em>vs. Competencia</em></h2>
+      <div class="quotes-list">
+        <div class="big-quote reveal d1">
+          <blockquote>"No toda empresa necesita más IA. Muchas necesitan una mejor forma de pensar antes de automatizar."</blockquote>
+          <cite>— Héctor Hernández</cite>
+        </div>
+        <div class="big-quote reveal d2">
+          <blockquote>"El verdadero riesgo no es lo que un agente hace. Es a qué le vas a dar acceso."</blockquote>
+          <cite>— Shuya Gong</cite>
+        </div>
+        <div class="big-quote reveal d3">
+          <blockquote>"El error no siempre está en el modelo. A veces está en la forma en que una empresa formuló el problema."</blockquote>
+          <cite>— J. Weddington</cite>
+        </div>
+      </div>
+      <p style="font-size:0.88rem; color:rgba(255,255,255,0.45); text-align:center; margin-bottom:2rem; letter-spacing:-0.01em;" class="reveal">La conversación ya avanzó. Líderes de firmas globales ya están tomando decisiones. Si estuviste, el siguiente paso es actuar. Si no, es momento de integrarte.</p>
+      <div class="cta-center reveal">
+        <a href="contacto.html" class="btn-dorado-filled">Quiero implementar</a>
+        <a href="contacto.html" class="btn-dorado-outline">Explora dónde empezar</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTADOS -->
+  <section id="resultados">
+    <div class="resultados-inner">
+      <div class="reveal">
+        <span class="section-label" style="color:rgba(255,255,255,0.3);">Escala hoy</span>
+        <h2>Esta es tu <em>puerta de entrada</em></h2>
+      </div>
+      <div class="manifesto reveal">
+        Hoy no se trata solo de herramientas.<br>
+        Se trata de <em>criterio, arquitectura y responsabilidad</em>.<br>
+        Y esa conversación apenas está empezando.
+      </div>
+      <ul class="resultados-list reveal">
+        <li>La ventaja no está en usar la IA "más impresionante"</li>
+        <li>La mayoría de las empresas cree que tiene un problema de adopción de IA. En realidad, tiene un problema de criterio.</li>
+        <li>Más contexto no significa más inteligencia.</li>
+        <li>Un modelo puede tener más capacidad que nunca... y aun así no entender realmente el mundo que está viendo.</li>
+        <li>Lo más peligroso de un sistema inteligente no es que falle. Es que parezca entender cuando todavía no comprende.</li>
+      </ul>
+      <div class="cta-center reveal">
+        <a href="contacto.html" class="btn-dorado-filled">Diseñar, definir y crear adopción</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section id="cta-final">
+    <div class="reveal">
+      <span class="section-label">¿Y ahora cómo creo adopción en mi empresa?</span>
+      <h2>Las empresas no están fallando<br>por falta de <em>inteligencia artificial</em></h2>
+      <p>Están fallando por falta de criterio, estructura y gobernanza para usarla bien.</p>
+      <div>
+        <a href="contacto.html" class="btn-dark">Adopción con H. Hernández</a>
+        <a href="contacto.html" class="btn-light">4 pasos para empezar →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-logo"><img src="images/logo.png" alt="Descúbrete+"></div>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="programas.html">Programas</a></li>
+        <li><a href="nosotros.html">Nosotros</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+      <div style="font-size:0.76rem; color:rgba(255,255,255,0.3);">
+        <a href="https://instagram.com/descubrete_mx" target="_blank" style="color:var(--naranja); text-decoration:none;">@descubrete_mx</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>©2026 por Descúbrete+ · Forward34</p>
+      <div class="footer-email"><a href="mailto:contacto@descubrete.mx">contacto@descubrete.mx</a></div>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
