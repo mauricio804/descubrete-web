@@ -26,11 +26,11 @@
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 0 2.5rem; height: 80px;
+      padding: 0 2.5rem; height: 64px;
       background: rgba(250,250,250,0.88); backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--borde);
     }
-    .nav-logo img { height: 55px; width: auto; }
+    .nav-logo img { height: 90px; width: auto; }
     .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
     .nav-links a { text-decoration: none; font-size: 0.82rem; font-weight: 450; color: var(--gris-1); transition: color 0.15s; letter-spacing: -0.01em; }
     .nav-links a:hover { color: var(--negro); }
@@ -41,8 +41,23 @@
     #hero {
       min-height: 100vh; display: flex; flex-direction: column;
       align-items: center; justify-content: center;
-      text-align: center; padding: 6rem 2rem 5rem;
+      text-align: center; padding: 8rem 2rem 5rem;
       background: var(--blanco);
+      position: relative; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: url('images/hero.jpg') center/cover no-repeat;
+      opacity: 0.07;
+      pointer-events: none;
+    }
+    /* SERVICE IMAGES */
+    .service-img {
+      width: 100%; height: 160px;
+      object-fit: cover;
+      border-radius: 6px;
+      margin-bottom: 1.2rem;
+      display: block;
     }
     .hero-badge {
       display: inline-flex; align-items: center; gap: 0.5rem;
@@ -204,6 +219,7 @@
 
   <!-- HERO -->
   <section id="hero">
+    <div class="hero-bg"></div>
     <div class="hero-badge"><span class="badge-dot"></span>Inspírate · Aprende · Evoluciona</div>
     <h1 class="hero-title">
       Descúbrete+ crea experiencias,<br>
@@ -217,7 +233,7 @@
       Para que personas y organizaciones desarrollen claridad, criterio y conexión en una etapa de cambio personal, profesional y tecnológico.
     </p>
     <div class="hero-buttons">
-      <a href="#lo-que-hacemos" class="btn-dark">Conoce Descúbrete+</a>
+      <a href="programas.html" class="btn-dark">Conoce Descúbrete+</a>
       <a href="agentic.html" class="btn-light">Explora Agentic26 →</a>
     </div>
     <div class="hero-pillars">
@@ -240,12 +256,14 @@
     </div>
     <div class="services-grid">
       <div class="service-card reveal d1">
+        <img src="images/summit.jpg" alt="Descúbrete Summit" class="service-img">
         <span class="service-num">01</span>
         <h3>Descúbrete Summit</h3>
         <p>El evento de mayor impacto para líderes que buscan claridad, criterio y conexión. Speakers internacionales y comunidad de alto nivel.</p>
         <a href="programas.html" class="service-link">Conocer más →</a>
       </div>
       <div class="service-card reveal d2">
+        <img src="images/talks.jpg" alt="Descúbrete Talks" class="service-img">
         <span class="service-num">02</span>
         <h3>Descúbrete Talks</h3>
         <p>Conversaciones íntimas con referentes de clase mundial. Criterio, liderazgo y visión para adelantarte a tu competencia.</p>
@@ -264,12 +282,14 @@
         <a href="programas.html" class="service-link">Escuchar →</a>
       </div>
       <div class="service-card reveal d2">
+        <img src="images/agentic.jpg" alt="Fireside Chats" class="service-img">
         <span class="service-num">05</span>
         <h3>Fireside Chats</h3>
         <p>Conversaciones íntimas con referentes internacionales. Acceso a perspectivas que no encuentras en ningún otro foro de la región.</p>
         <a href="programas.html" class="service-link">Conocer más →</a>
       </div>
       <div class="service-card reveal d3">
+        <img src="images/comunidad.jpg" alt="Comunidad" class="service-img">
         <span class="service-num">06</span>
         <h3>Comunidad</h3>
         <p>Conectamos talento, empresas e innovación para acelerar crecimiento y colaboración. Una red de personas que decidieron avanzar.</p>
