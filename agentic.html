@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/png" href="images/favicon.png">
   <title>Agentic26 | Descúbrete+</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
   <style>
@@ -63,7 +62,7 @@
     .hero-slide:nth-child(9) { background-image: url('images/agentic9.jpg'); animation-delay: 24s; }
     .hero-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.75) 50%, rgba(0,0,0,0.88) 100%);
+      background: linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.65) 50%, rgba(0,0,0,0.8) 100%);
       z-index: 1;
     }
     #hero::before {
@@ -400,8 +399,83 @@
       <span class="section-label">Contacto</span>
       <h2 style="font-family:'DM Serif Display',serif; font-size:clamp(1.8rem,3vw,2.5rem); font-weight:400; letter-spacing:-0.03em; margin-bottom:0.5rem;">Contáctanos</h2>
       <p style="font-size:0.85rem; color:var(--gris-1); margin-bottom:2rem; letter-spacing:-0.01em;">Completa la información para definir tu objetivo</p>
-      <div style="border:1px solid var(--borde); border-radius:14px; overflow:hidden; background:var(--fondo-2);">
-        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSf40AVPNKOiN_CxX9lEcLww4dXwjOxN0yLO1eVjCQ8pEykOsw/viewform?embedded=true" width="100%" height="1429" frameborder="0" marginheight="0" marginwidth="0" style="border:none; display:block;">Cargando…</iframe>
+      <div style="border:1px solid var(--borde); border-radius:14px; overflow:hidden; background:var(--blanco); position:relative;">
+        <div style="position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg, var(--naranja), var(--dorado), var(--azul));"></div>
+        <form action="https://formspree.io/f/mbdwnznn" method="POST" style="padding:2.5rem;">
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; margin-bottom:1.2rem;">
+            <div>
+              <label style="font-size:0.75rem; font-weight:500; color:var(--negro); letter-spacing:-0.01em; display:block; margin-bottom:0.5rem;">Nombre <span style="color:var(--naranja);">*</span></label>
+              <input type="text" name="nombre" required placeholder="Tu nombre"
+                style="width:100%; padding:0.75rem 1rem; border:1px solid var(--borde); border-radius:8px; font-size:0.85rem; font-family:'Inter',sans-serif; background:var(--fondo); color:var(--negro); outline:none; transition:border-color 0.15s;"
+                onfocus="this.style.borderColor='var(--naranja)'" onblur="this.style.borderColor='var(--borde)'">
+            </div>
+            <div>
+              <label style="font-size:0.75rem; font-weight:500; color:var(--negro); letter-spacing:-0.01em; display:block; margin-bottom:0.5rem;">Apellido</label>
+              <input type="text" name="apellido" placeholder="Tu apellido"
+                style="width:100%; padding:0.75rem 1rem; border:1px solid var(--borde); border-radius:8px; font-size:0.85rem; font-family:'Inter',sans-serif; background:var(--fondo); color:var(--negro); outline:none; transition:border-color 0.15s;"
+                onfocus="this.style.borderColor='var(--naranja)'" onblur="this.style.borderColor='var(--borde)'">
+            </div>
+          </div>
+
+          <div style="margin-bottom:1.2rem;">
+            <label style="font-size:0.75rem; font-weight:500; color:var(--negro); letter-spacing:-0.01em; display:block; margin-bottom:0.5rem;">Email <span style="color:var(--naranja);">*</span></label>
+            <input type="email" name="email" required placeholder="tu@email.com"
+              style="width:100%; padding:0.75rem 1rem; border:1px solid var(--borde); border-radius:8px; font-size:0.85rem; font-family:'Inter',sans-serif; background:var(--fondo); color:var(--negro); outline:none; transition:border-color 0.15s;"
+              onfocus="this.style.borderColor='var(--naranja)'" onblur="this.style.borderColor='var(--borde)'">
+          </div>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; margin-bottom:1.2rem;">
+            <div>
+              <label style="font-size:0.75rem; font-weight:500; color:var(--negro); letter-spacing:-0.01em; display:block; margin-bottom:0.5rem;">Nombre de la compañía <span style="color:var(--naranja);">*</span></label>
+              <input type="text" name="compania" required placeholder="Tu empresa"
+                style="width:100%; padding:0.75rem 1rem; border:1px solid var(--borde); border-radius:8px; font-size:0.85rem; font-family:'Inter',sans-serif; background:var(--fondo); color:var(--negro); outline:none; transition:border-color 0.15s;"
+                onfocus="this.style.borderColor='var(--naranja)'" onblur="this.style.borderColor='var(--borde)'">
+            </div>
+            <div>
+              <label style="font-size:0.75rem; font-weight:500; color:var(--negro); letter-spacing:-0.01em; display:block; margin-bottom:0.5rem;">Teléfono</label>
+              <input type="tel" name="telefono" placeholder="+52 55 0000 0000"
+                style="width:100%; padding:0.75rem 1rem; border:1px solid var(--borde); border-radius:8px; font-size:0.85rem; font-family:'Inter',sans-serif; background:var(--fondo); color:var(--negro); outline:none; transition:border-color 0.15s;"
+                onfocus="this.style.borderColor='var(--naranja)'" onblur="this.style.borderColor='var(--borde)'">
+            </div>
+          </div>
+
+          <div style="margin-bottom:1.2rem;">
+            <label style="font-size:0.75rem; font-weight:500; color:var(--negro); letter-spacing:-0.01em; display:block; margin-bottom:0.8rem;">¿Qué estás buscando para avanzar actualmente? <span style="color:var(--naranja);">*</span></label>
+            <div style="display:flex; flex-direction:column; gap:0.6rem;">
+              <label style="display:flex; align-items:center; gap:0.7rem; font-size:0.83rem; color:var(--gris-1); cursor:pointer;">
+                <input type="radio" name="objetivo" value="Mi desarrollo personal" required style="accent-color:var(--naranja); width:16px; height:16px;">
+                Mi desarrollo personal
+              </label>
+              <label style="display:flex; align-items:center; gap:0.7rem; font-size:0.83rem; color:var(--gris-1); cursor:pointer;">
+                <input type="radio" name="objetivo" value="Crecimiento personal y Liderazgo" style="accent-color:var(--naranja); width:16px; height:16px;">
+                Crecimiento personal y Liderazgo
+              </label>
+              <label style="display:flex; align-items:center; gap:0.7rem; font-size:0.83rem; color:var(--gris-1); cursor:pointer;">
+                <input type="radio" name="objetivo" value="Escalar mi negocio o área" style="accent-color:var(--naranja); width:16px; height:16px;">
+                Escalar mi negocio o área
+              </label>
+              <label style="display:flex; align-items:center; gap:0.7rem; font-size:0.83rem; color:var(--gris-1); cursor:pointer;">
+                <input type="radio" name="objetivo" value="Explorando opciones" style="accent-color:var(--naranja); width:16px; height:16px;">
+                Explorando opciones
+              </label>
+            </div>
+          </div>
+
+          <div style="margin-bottom:2rem;">
+            <label style="font-size:0.75rem; font-weight:500; color:var(--negro); letter-spacing:-0.01em; display:block; margin-bottom:0.5rem;">Mensaje <span style="color:var(--naranja);">*</span></label>
+            <textarea name="mensaje" required placeholder="Cuéntanos cómo podemos ayudarte..." rows="4"
+              style="width:100%; padding:0.75rem 1rem; border:1px solid var(--borde); border-radius:8px; font-size:0.85rem; font-family:'Inter',sans-serif; background:var(--fondo); color:var(--negro); outline:none; resize:vertical; transition:border-color 0.15s;"
+              onfocus="this.style.borderColor='var(--naranja)'" onblur="this.style.borderColor='var(--borde)'"></textarea>
+          </div>
+
+          <button type="submit"
+            style="width:100%; background:var(--negro); color:white; padding:0.9rem; border:none; border-radius:8px; font-size:0.88rem; font-weight:500; font-family:'Inter',sans-serif; cursor:pointer; letter-spacing:-0.01em; transition:opacity 0.15s;"
+            onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
+            Enviar mensaje
+          </button>
+
+        </form>
       </div>
     </div>
   </section>
