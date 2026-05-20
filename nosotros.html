@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <title>Nosotros · Descúbrete+</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --naranja: #F26522;
+      --azul: #1B3A6B;
+      --dorado: #B8956A;
+      --beige: #F5F0EB;
+      --negro: #09090B;
+      --gris-1: #71717A;
+      --gris-2: #A1A1AA;
+      --fondo: #FAFAFA;
+      --fondo-2: #F4F4F5;
+      --blanco: #FFFFFF;
+      --borde: #E4E4E7;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: var(--fondo); color: var(--negro); overflow-x: hidden; }
+
+    /* NAV — idéntico al index */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2.5rem; height: 64px;
+      background: rgba(250,250,250,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--borde);
+    }
+    .nav-logo img { height: 52px; width: auto; }
+    .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+    .nav-links a { text-decoration: none; font-size: 0.82rem; font-weight: 450; color: var(--gris-1); transition: color 0.15s; letter-spacing: -0.01em; }
+    .nav-links a:hover { color: var(--negro); }
+    .nav-links a.active { color: var(--negro); font-weight: 500; }
+    .nav-cta { background: var(--negro) !important; color: white !important; padding: 0.5rem 1.2rem !important; border-radius: 6px; font-weight: 500 !important; }
+    .nav-cta:hover { opacity: 0.8; }
+
+    /* REVEAL */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* HERO NOSOTROS */
+    #hero-nosotros {
+      background: var(--negro);
+      padding: 7rem 2.5rem 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    #hero-nosotros::before {
+      content: '';
+      position: absolute;
+      top: -40%; right: -10%;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(242,101,34,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-nosotros-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end;
+    }
+    .hero-nosotros-label {
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--naranja); margin-bottom: 1.5rem; display: block;
+    }
+    .hero-nosotros-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 400; line-height: 1.1; letter-spacing: -0.03em;
+      color: var(--blanco);
+    }
+    .hero-nosotros-title em { font-style: italic; color: var(--naranja); }
+    .hero-nosotros-right {
+      padding-bottom: 0.5rem;
+    }
+    .hero-nosotros-right p {
+      font-size: 1rem; color: rgba(255,255,255,0.6);
+      line-height: 1.75; letter-spacing: -0.01em;
+      max-width: 420px;
+    }
+    .hero-nosotros-right strong { color: rgba(255,255,255,0.9); }
+
+    /* STATS BAND */
+    #stats {
+      background: var(--blanco);
+      border-bottom: 1px solid var(--borde);
+      padding: 3rem 2.5rem;
+    }
+    .stats-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+    .stat-item {
+      padding: 0 2rem;
+      border-right: 1px solid var(--borde);
+    }
+    .stat-item:first-child { padding-left: 0; }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.6rem; font-weight: 400;
+      letter-spacing: -0.04em; color: var(--negro);
+      line-height: 1;
+    }
+    .stat-num span { color: var(--naranja); }
+    .stat-label {
+      font-size: 0.75rem; color: var(--gris-1);
+      margin-top: 0.5rem; line-height: 1.4;
+      letter-spacing: -0.01em;
+    }
+
+    /* ORIGEN */
+    #origen {
+      padding: 7rem 2.5rem;
+      background: var(--fondo);
+    }
+    .origen-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1.2fr; gap: 6rem; align-items: start;
+    }
+    .origen-left { position: sticky; top: 100px; }
+    .section-label { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gris-2); margin-bottom: 1rem; display: block; }
+    .origen-left h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 400; line-height: 1.15;
+      letter-spacing: -0.03em;
+    }
+    .origen-left h2 em { font-style: italic; color: var(--naranja); }
+    .origen-right p {
+      font-size: 0.95rem; color: var(--gris-1);
+      line-height: 1.85; letter-spacing: -0.01em;
+      margin-bottom: 1.5rem;
+    }
+    .origen-right p strong { color: var(--negro); }
+    .origen-quote {
+      margin-top: 2.5rem;
+      padding: 2rem;
+      border-left: 3px solid var(--naranja);
+      background: var(--blanco);
+    }
+    .origen-quote p {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.2rem; font-weight: 400;
+      font-style: italic; line-height: 1.5;
+      letter-spacing: -0.02em;
+      color: var(--negro);
+      margin: 0;
+    }
+
+    /* IDEAS CENTRALES */
+    #ideas {
+      background: var(--negro);
+      padding: 6rem 2.5rem;
+    }
+    .ideas-inner { max-width: 1100px; margin: 0 auto; }
+    .ideas-header {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      margin-bottom: 3.5rem;
+    }
+    .ideas-header h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+      font-weight: 400; letter-spacing: -0.03em;
+      color: var(--blanco); line-height: 1.2;
+    }
+    .ideas-header h2 em { font-style: italic; color: var(--naranja); }
+    .ideas-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+      background: rgba(255,255,255,0.08);
+    }
+    .idea-item {
+      padding: 2rem 1.8rem;
+      background: var(--negro);
+      transition: background 0.2s;
+    }
+    .idea-item:hover { background: rgba(255,255,255,0.04); }
+    .idea-num {
+      font-size: 0.6rem; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--naranja);
+      margin-bottom: 1.2rem; display: block;
+    }
+    .idea-item p {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.05rem; font-weight: 400;
+      font-style: italic; line-height: 1.5;
+      letter-spacing: -0.02em;
+      color: rgba(255,255,255,0.85);
+    }
+
+    /* EQUIPO */
+    #equipo {
+      padding: 7rem 2.5rem;
+      background: var(--blanco);
+    }
+    .equipo-inner { max-width: 1100px; margin: 0 auto; }
+    .equipo-header { margin-bottom: 4rem; }
+    .equipo-header h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 400; letter-spacing: -0.03em; line-height: 1.2;
+    }
+    .equipo-header h2 em { font-style: italic; color: var(--naranja); }
+    .equipo-header p {
+      font-size: 0.88rem; color: var(--gris-1); line-height: 1.7;
+      letter-spacing: -0.01em; max-width: 480px; margin-top: 0.8rem;
+    }
+    .equipo-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+    }
+    .team-card {
+      border: 1px solid var(--borde);
+      border-radius: 12px; overflow: hidden;
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+    .team-card:hover {
+      box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+      transform: translateY(-4px);
+    }
+    .team-photo {
+      width: 100%; aspect-ratio: 4/3;
+      object-fit: cover; object-position: top center;
+      display: block;
+      filter: grayscale(20%) contrast(1.05);
+      transition: filter 0.3s;
+    }
+    .team-card:hover .team-photo { filter: grayscale(0%) contrast(1.05); }
+    .team-info { padding: 1.5rem; }
+    .team-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.2rem; font-weight: 400;
+      letter-spacing: -0.02em; color: var(--negro);
+      margin-bottom: 0.25rem;
+    }
+    .team-role {
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--naranja);
+      margin-bottom: 0.8rem;
+    }
+    .team-bio {
+      font-size: 0.8rem; color: var(--gris-1);
+      line-height: 1.65; letter-spacing: -0.01em;
+    }
+
+    /* ECOSISTEMA */
+    #ecosistema {
+      padding: 7rem 2.5rem;
+      background: var(--fondo);
+    }
+    .ecosistema-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 1.2fr 1fr; gap: 5rem; align-items: center;
+    }
+    .ecosistema-left h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 400; letter-spacing: -0.03em; line-height: 1.2;
+      margin-bottom: 1.2rem;
+    }
+    .ecosistema-left h2 em { font-style: italic; color: var(--naranja); }
+    .ecosistema-left p {
+      font-size: 0.88rem; color: var(--gris-1); line-height: 1.7;
+      letter-spacing: -0.01em; margin-bottom: 1rem;
+    }
+    .ecosistema-tags {
+      display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem;
+    }
+    .ecosistema-tag {
+      font-size: 0.72rem; font-weight: 500;
+      padding: 0.35rem 0.9rem; border-radius: 100px;
+      border: 1px solid var(--borde); color: var(--gris-1);
+      background: var(--blanco);
+      letter-spacing: -0.01em;
+    }
+    .ecosistema-right {
+      background: var(--negro);
+      border-radius: 12px; padding: 2.5rem;
+      position: relative; overflow: hidden;
+    }
+    .ecosistema-right::before {
+      content: '';
+      position: absolute; bottom: -30%; right: -20%;
+      width: 250px; height: 250px;
+      background: radial-gradient(circle, rgba(242,101,34,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .ecosistema-right-label {
+      font-size: 0.62rem; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--naranja); margin-bottom: 1rem; display: block;
+    }
+    .ecosistema-right h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.5rem; font-weight: 400;
+      letter-spacing: -0.02em; color: var(--blanco);
+      margin-bottom: 1rem; line-height: 1.2;
+    }
+    .ecosistema-right p {
+      font-size: 0.82rem; color: rgba(255,255,255,0.55);
+      line-height: 1.7; letter-spacing: -0.01em;
+      margin-bottom: 1.5rem;
+    }
+    .ecosistema-right a {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.78rem; font-weight: 500; color: var(--blanco);
+      text-decoration: none; border: 1px solid rgba(255,255,255,0.2);
+      padding: 0.5rem 1.1rem; border-radius: 6px;
+      transition: all 0.15s;
+    }
+    .ecosistema-right a:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.4); }
+
+    /* CTA FINAL */
+    #cta-nosotros {
+      padding: 6rem 2.5rem;
+      background: var(--blanco);
+      border-top: 1px solid var(--borde);
+      text-align: center;
+    }
+    .cta-inner { max-width: 600px; margin: 0 auto; }
+    .cta-inner h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 3rem);
+      font-weight: 400; letter-spacing: -0.03em; line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .cta-inner h2 em { font-style: italic; color: var(--naranja); }
+    .cta-inner p {
+      font-size: 0.9rem; color: var(--gris-1);
+      line-height: 1.7; letter-spacing: -0.01em;
+      margin-bottom: 2rem;
+    }
+    .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-dark { background: var(--negro); color: white; padding: 0.75rem 1.8rem; border-radius: 8px; font-size: 0.85rem; font-weight: 500; text-decoration: none; transition: opacity 0.15s; letter-spacing: -0.01em; display: inline-block; }
+    .btn-dark:hover { opacity: 0.8; }
+    .btn-light { background: var(--blanco); color: var(--negro); padding: 0.75rem 1.8rem; border-radius: 8px; border: 1px solid var(--borde); font-size: 0.85rem; font-weight: 500; text-decoration: none; transition: background 0.15s; letter-spacing: -0.01em; display: inline-block; }
+    .btn-light:hover { background: var(--fondo-2); }
+
+    /* FOOTER — idéntico al index */
+    footer {
+      background: var(--negro); color: rgba(255,255,255,0.5);
+      padding: 2.5rem 2.5rem; font-size: 0.78rem; letter-spacing: -0.01em;
+    }
+    .footer-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1.5rem; }
+    .footer-logo img { height: 36px; width: auto; filter: brightness(0) invert(1); opacity: 0.7; }
+    .footer-links { display: flex; gap: 1.5rem; list-style: none; }
+    .footer-links a { color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.15s; }
+    .footer-links a:hover { color: white; }
+    .footer-social-icons { display: flex; gap: 1.2rem; }
+    .footer-social-icons a { color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.15s; }
+    .footer-social-icons a:hover { color: white; }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 1.5rem; flex-wrap: wrap; gap: 0.5rem; }
+    .footer-email a { color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.15s; }
+    .footer-email a:hover { color: white; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      nav { padding: 0 1.5rem; }
+      .hero-nosotros-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .stats-inner { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+      .stat-item { border-right: none; padding: 0; }
+      .origen-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .origen-left { position: static; }
+      .ideas-grid { grid-template-columns: 1fr; }
+      .equipo-grid { grid-template-columns: 1fr; }
+      .ecosistema-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      #hero-nosotros, #origen, #ideas, #equipo, #ecosistema, #cta-nosotros { padding: 5rem 1.5rem; }
+      #stats { padding: 2.5rem 1.5rem; }
+      .ideas-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+      footer { padding: 2rem 1.5rem; }
+      .footer-top { flex-direction: column; text-align: center; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-logo"><img src="images/logo.png" alt="Descúbrete+"></div>
+    <ul class="nav-links">
+      <li><a href="programas.html">Programas</a></li>
+      <li><a href="agentic.html">Agentic</a></li>
+      <li><a href="nosotros.html" class="active">Nosotros</a></li>
+      <li><a href="contacto.html" class="nav-cta">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero-nosotros">
+    <div class="hero-nosotros-inner">
+      <div class="reveal">
+        <span class="hero-nosotros-label">Quiénes somos</span>
+        <h1 class="hero-nosotros-title">La transición<br>ya <em>empezó.</em></h1>
+      </div>
+      <div class="hero-nosotros-right reveal">
+        <p>
+          <strong>Descúbrete+ nació de una pregunta incómoda:</strong> ¿qué pasa cuando la tecnología avanza más rápido que nuestra capacidad humana para adaptarnos?<br><br>
+          No somos una plataforma motivacional. No somos una empresa de cursos. Somos un ecosistema diseñado para ayudar a personas, líderes y organizaciones a operar con claridad en la era AI.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section id="stats">
+    <div class="stats-inner">
+      <div class="stat-item reveal">
+        <div class="stat-num">900<span>+</span></div>
+        <div class="stat-label">asistentes en el<br>Descúbrete+ Summit 2024</div>
+      </div>
+      <div class="stat-item reveal">
+        <div class="stat-num">20<span>+</span></div>
+        <div class="stat-label">conferencistas de<br>talla internacional</div>
+      </div>
+      <div class="stat-item reveal">
+        <div class="stat-num">86<span>%</span></div>
+        <div class="stat-label">de satisfacción<br>entre asistentes</div>
+      </div>
+      <div class="stat-item reveal">
+        <div class="stat-num">1.7<span>M</span></div>
+        <div class="stat-label">cuentas alcanzadas<br>en redes sociales</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ORIGEN -->
+  <section id="origen">
+    <div class="origen-inner">
+      <div class="origen-left reveal">
+        <span class="section-label">Nuestra historia</span>
+        <h2>Una pregunta<br>que no se<br>podía <em>ignorar.</em></h2>
+      </div>
+      <div class="origen-right reveal">
+        <p>
+          Durante años, los fundadores observaron cómo personas y organizaciones estaban rodeadas de más información, más herramientas y más velocidad — pero no de más claridad, conexión o dirección.
+        </p>
+        <p>
+          Lo que comenzó como conversaciones sobre desarrollo humano y propósito evolucionó hacia algo más profundo: entender cómo ayudar a las personas a navegar una nueva era donde la inteligencia artificial ya no solo automatiza tareas, sino que participa activamente en decisiones, operaciones y dinámicas humanas.
+        </p>
+        <p>
+          <strong>Descúbrete+ nació para acompañar esa transición.</strong> Hoy integramos experiencias presenciales, transformación organizacional, inteligencia artificial, comunidad, liderazgo y sistemas de decisión — en una sola visión.
+        </p>
+        <div class="origen-quote">
+          <p>"La tecnología puede acelerar procesos. Pero el criterio humano sigue definiendo el rumbo."</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- IDEAS CENTRALES -->
+  <section id="ideas">
+    <div class="ideas-inner">
+      <div class="ideas-header reveal">
+        <h2>Lo que nos<br><em>define.</em></h2>
+      </div>
+      <div class="ideas-grid">
+        <div class="idea-item reveal">
+          <span class="idea-num">01</span>
+          <p>"Rehumanizar la era digital."</p>
+        </div>
+        <div class="idea-item reveal">
+          <span class="idea-num">02</span>
+          <p>"Pocos movimientos generan la mayor parte del resultado."</p>
+        </div>
+        <div class="idea-item reveal">
+          <span class="idea-num">03</span>
+          <p>"La IA debe amplificar lo humano, no reemplazarlo."</p>
+        </div>
+        <div class="idea-item reveal">
+          <span class="idea-num">04</span>
+          <p>"La claridad es ventaja competitiva."</p>
+        </div>
+        <div class="idea-item reveal">
+          <span class="idea-num">05</span>
+          <p>"El futuro no pertenecerá a quienes tengan más tecnología, sino a quienes desarrollen más criterio para usarla."</p>
+        </div>
+        <div class="idea-item reveal">
+          <span class="idea-num">06</span>
+          <p>"El siguiente gran reto no será solo tecnológico. Será profundamente humano."</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EQUIPO -->
+  <section id="equipo">
+    <div class="equipo-inner">
+      <div class="equipo-header reveal">
+        <span class="section-label">El equipo</span>
+        <h2>Las personas<br>detrás del <em>ecosistema.</em></h2>
+        <p>Combinamos experiencia en emprendimiento, marketing estratégico, desarrollo humano, tecnología y facilitación de experiencias.</p>
+      </div>
+      <div class="equipo-grid">
+        <div class="team-card reveal">
+          <img class="team-photo"
+               src="images/hector.jpg"
+               alt="Héctor Hernández"
+               onerror="this.style.background='#1a1a1a'; this.style.aspectRatio='4/3'; this.removeAttribute('src');">
+          <div class="team-info">
+            <div class="team-name">Héctor Hernández</div>
+            <div class="team-role">CEO & Fundador</div>
+            <p class="team-bio">Autor de <em>La promesa de morir a los 40</em>. Su historia personal de transformación se convirtió en una de las raíces filosóficas del proyecto. Trabaja en la intersección entre inteligencia artificial, claridad humana y liderazgo consciente.</p>
+          </div>
+        </div>
+        <div class="team-card reveal">
+          <img class="team-photo"
+               src="images/florencia.jpg"
+               alt="Florencia Morales"
+               onerror="this.style.background='#1a1a1a'; this.style.aspectRatio='4/3'; this.removeAttribute('src');">
+          <div class="team-info">
+            <div class="team-name">Florencia Morales</div>
+            <div class="team-role">Co-Fundadora · Directora de Operaciones</div>
+            <p class="team-bio">Lidera estrategia, marketing, experiencia de marca y ejecución operativa. Su trabajo conecta creatividad, sistemas y experiencia humana para transformar ideas complejas en experiencias claras y accionables.</p>
+          </div>
+        </div>
+        <div class="team-card reveal">
+          <img class="team-photo"
+               src="images/pablo.jpg"
+               alt="Pablo Cáceres"
+               onerror="this.style.background='#1a1a1a'; this.style.aspectRatio='4/3'; this.removeAttribute('src');">
+          <div class="team-info">
+            <div class="team-name">Pablo Cáceres</div>
+            <div class="team-role">Facilitador & Estratega</div>
+            <p class="team-bio">Ha ayudado a traducir conversaciones profundas en dinámicas prácticas que fortalecen cultura, conexión y ejecución colectiva. Pieza clave en experiencias organizacionales y liderazgo humano.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ECOSISTEMA / FORWARD34 -->
+  <section id="ecosistema">
+    <div class="ecosistema-inner">
+      <div class="ecosistema-left reveal">
+        <span class="section-label">El ecosistema</span>
+        <h2>Más que un evento.<br>Un sistema <em>completo.</em></h2>
+        <p>Descúbrete+ funciona como una mezcla entre plataforma de transformación, laboratorio de ideas, comunidad estratégica y sistema operativo humano para la era AI.</p>
+        <p>Hoy el ecosistema se expande a través de programas corporativos, summits, workshops, experiencias ejecutivas, comunidad digital, contenidos estratégicos e iniciativas de IA aplicada — incluyendo <strong>AGENTIC 2026</strong>, un foro internacional para líderes que están redefiniendo cómo operan las empresas en la era agentic.</p>
+        <div class="ecosistema-tags">
+          <span class="ecosistema-tag">Summits</span>
+          <span class="ecosistema-tag">Programas corporativos</span>
+          <span class="ecosistema-tag">Workshops</span>
+          <span class="ecosistema-tag">Comunidad digital</span>
+          <span class="ecosistema-tag">IA aplicada</span>
+          <span class="ecosistema-tag">Liderazgo</span>
+          <span class="ecosistema-tag">AGENTIC 2026</span>
+        </div>
+      </div>
+      <div class="ecosistema-right reveal">
+        <span class="ecosistema-right-label">⚡ Forward34</span>
+        <h3>La capa de implementación.</h3>
+        <p>Detrás del ecosistema existe Forward34 — la estructura estratégica y operativa que impulsa la evolución de Descúbrete+ y trabaja directamente con organizaciones en arquitectura estratégica, integración de IA, cultura, liderazgo y sistemas de decisión.</p>
+        <p style="font-style: italic; color: rgba(255,255,255,0.35); font-size: 0.78rem;">La conversación abre la puerta. La ejecución es lo que cambia todo.</p>
+        <a href="https://www.forward34.com/index.html" target="_blank">Conoce Forward34 →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section id="cta-nosotros">
+    <div class="cta-inner">
+      <h2 class="reveal">¿Listo para <em>avanzar?</em></h2>
+      <p class="reveal">Si tu organización está navegando la transición hacia la era AI y quieres hacerlo con claridad, hablemos.</p>
+      <div class="cta-buttons reveal">
+        <a href="contacto.html" class="btn-dark">Contáctanos</a>
+        <a href="programas.html" class="btn-light">Ver programas</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-logo"><img src="images/logo.png" alt="Descúbrete+"></div>
+      <ul class="footer-links">
+        <li><a href="programas.html">Programas</a></li>
+        <li><a href="agentic.html">Agentic</a></li>
+        <li><a href="nosotros.html">Nosotros</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+      <div class="footer-social-icons">
+        <a href="https://wa.me/" target="_blank">WhatsApp</a>
+        <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+        <a href="https://tiktok.com/@descubrete_mx" target="_blank">TikTok</a>
+        <a href="https://instagram.com/descubrete_mx" target="_blank">Instagram</a>
+        <a href="https://facebook.com" target="_blank">Facebook</a>
+        <a href="https://twitter.com" target="_blank">X</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>©2026 por Descúbrete+ · Forward34 · Todos los derechos reservados</p>
+      <div class="footer-email"><a href="mailto:contacto@descubrete.mx">contacto@descubrete.mx</a></div>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
