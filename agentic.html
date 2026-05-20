@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" type="image/png" href="images/favicon.png">
   <title>Agentic26 | Descúbrete+</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
   <style>
@@ -33,30 +32,57 @@
     .nav-cta:hover { opacity: 0.8; }
 
     /* HERO */
+    @keyframes fadeSlide {
+      0%   { opacity: 0; }
+      8%   { opacity: 1; }
+      25%  { opacity: 1; }
+      33%  { opacity: 0; }
+      100% { opacity: 0; }
+    }
     #hero {
       min-height: 100vh; display: flex; flex-direction: column;
       align-items: center; justify-content: center;
       text-align: center; padding: 8rem 2rem 5rem;
       background: var(--negro); position: relative; overflow: hidden;
     }
+    .hero-slide {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+      opacity: 0;
+      animation: fadeSlide 27s infinite;
+    }
+    .hero-slide:nth-child(1) { background-image: url('images/agentic1.png'); animation-delay: 0s; }
+    .hero-slide:nth-child(2) { background-image: url('images/agentic2.png'); animation-delay: 3s; }
+    .hero-slide:nth-child(3) { background-image: url('images/agentic3.png'); animation-delay: 6s; }
+    .hero-slide:nth-child(4) { background-image: url('images/agentic4.png'); animation-delay: 9s; }
+    .hero-slide:nth-child(5) { background-image: url('images/agentic5.png'); animation-delay: 12s; }
+    .hero-slide:nth-child(6) { background-image: url('images/agentic6.jpg'); animation-delay: 15s; }
+    .hero-slide:nth-child(7) { background-image: url('images/agentic7.jpg'); animation-delay: 18s; }
+    .hero-slide:nth-child(8) { background-image: url('images/agentic8.jpg'); animation-delay: 21s; }
+    .hero-slide:nth-child(9) { background-image: url('images/agentic9.jpg'); animation-delay: 24s; }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.65) 50%, rgba(0,0,0,0.8) 100%);
+      z-index: 1;
+    }
     #hero::before {
       content: ''; position: absolute; top: -200px; left: 50%;
       transform: translateX(-50%); width: 800px; height: 800px;
       background: radial-gradient(circle, rgba(242,101,34,0.08) 0%, transparent 60%);
-      pointer-events: none;
+      pointer-events: none; z-index: 2;
     }
-    .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(242,101,34,0.08); border: 1px solid rgba(242,101,34,0.18); padding: 0.35rem 0.9rem; border-radius: 100px; font-size: 0.72rem; font-weight: 500; color: var(--naranja); margin-bottom: 2.5rem; opacity: 0; animation: fade-up 0.6s ease 0.1s forwards; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(242,101,34,0.08); border: 1px solid rgba(242,101,34,0.18); padding: 0.35rem 0.9rem; border-radius: 100px; font-size: 0.72rem; font-weight: 500; color: var(--naranja); margin-bottom: 2.5rem; opacity: 0; animation: fade-up 0.6s ease 0.1s forwards; position: relative; z-index: 2; }
     .badge-dot { width: 6px; height: 6px; background: var(--naranja); border-radius: 50%; animation: pulse 2s ease infinite; }
     @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.4; } }
-    .hero-title { font-family: 'DM Serif Display', serif; font-size: clamp(2.5rem, 5.5vw, 5rem); font-weight: 400; line-height: 1.1; letter-spacing: -0.03em; color: white; max-width: 820px; margin-bottom: 1.8rem; opacity: 0; animation: fade-up 0.6s ease 0.2s forwards; position: relative; z-index: 1; }
+    .hero-title { font-family: 'DM Serif Display', serif; font-size: clamp(2.5rem, 5.5vw, 5rem); font-weight: 400; line-height: 1.1; letter-spacing: -0.03em; color: white; max-width: 820px; margin-bottom: 1.8rem; opacity: 0; animation: fade-up 0.6s ease 0.2s forwards; position: relative; z-index: 2; text-shadow: 0 2px 12px rgba(0,0,0,0.5); }
     .hero-title em { font-style: italic; color: var(--naranja); }
-    .hero-subtitle { font-size: 1rem; color: rgba(255,255,255,0.5); max-width: 560px; line-height: 1.7; margin-bottom: 3rem; opacity: 0; animation: fade-up 0.6s ease 0.3s forwards; letter-spacing: -0.01em; position: relative; z-index: 1; }
-    .hero-buttons { display: flex; gap: 0.8rem; flex-wrap: wrap; justify-content: center; opacity: 0; animation: fade-up 0.6s ease 0.4s forwards; position: relative; z-index: 1; margin-bottom: 5rem; }
+    .hero-subtitle { font-size: 1rem; color: rgba(255,255,255,0.7); max-width: 560px; line-height: 1.7; margin-bottom: 3rem; opacity: 0; animation: fade-up 0.6s ease 0.3s forwards; letter-spacing: -0.01em; position: relative; z-index: 2; text-shadow: 0 2px 8px rgba(0,0,0,0.4); }
+    .hero-buttons { display: flex; gap: 0.8rem; flex-wrap: wrap; justify-content: center; opacity: 0; animation: fade-up 0.6s ease 0.4s forwards; position: relative; z-index: 2; margin-bottom: 5rem; }
     .btn-orange { background: var(--naranja); color: white; padding: 0.75rem 1.8rem; border-radius: 8px; font-size: 0.85rem; font-weight: 500; text-decoration: none; transition: opacity 0.15s; letter-spacing: -0.01em; display: inline-block; }
     .btn-orange:hover { opacity: 0.85; }
     .btn-ghost { background: transparent; color: rgba(255,255,255,0.6); padding: 0.75rem 1.8rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); font-size: 0.85rem; font-weight: 500; text-decoration: none; transition: all 0.15s; letter-spacing: -0.01em; display: inline-block; }
     .btn-ghost:hover { border-color: rgba(255,255,255,0.25); color: white; }
-    .hero-tags { display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; opacity: 0; animation: fade-up 0.6s ease 0.5s forwards; position: relative; z-index: 1; padding-top: 3.5rem; border-top: 1px solid rgba(255,255,255,0.06); width: 100%; max-width: 700px; }
+    .hero-tags { display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; opacity: 0; animation: fade-up 0.6s ease 0.5s forwards; position: relative; z-index: 2; padding-top: 3.5rem; border-top: 1px solid rgba(255,255,255,0.06); width: 100%; max-width: 700px; }
     .hero-tag { padding: 0.5rem 1rem; border: 1px solid rgba(255,255,255,0.07); border-radius: 100px; font-size: 0.76rem; color: rgba(255,255,255,0.35); letter-spacing: -0.01em; transition: all 0.2s; }
     .hero-tag:hover { border-color: rgba(242,101,34,0.25); color: rgba(255,255,255,0.6); }
     @keyframes fade-up { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
@@ -182,6 +208,16 @@
 
   <!-- HERO -->
   <section id="hero">
+    <div class="hero-slide"></div>
+    <div class="hero-slide"></div>
+    <div class="hero-slide"></div>
+    <div class="hero-slide"></div>
+    <div class="hero-slide"></div>
+    <div class="hero-slide"></div>
+    <div class="hero-slide"></div>
+    <div class="hero-slide"></div>
+    <div class="hero-slide"></div>
+    <div class="hero-overlay"></div>
     <div class="hero-badge"><span class="badge-dot"></span>AGENTIC26 — Querétaro, México</div>
     <h1 class="hero-title">La AI Agéntica<br>está <em>aquí</em></h1>
     <p class="hero-subtitle">Para quienes ya están decidiendo con criterio en un entorno donde la IA ya actúa sola.</p>
