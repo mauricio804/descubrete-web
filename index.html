@@ -171,6 +171,7 @@
     .forward34-note { margin-top: 3rem; padding: 2rem; border: 1px solid var(--borde); border-radius: 10px; background: var(--blanco); display: flex; align-items: center; gap: 1.5rem; }
     .forward34-note p { font-size: 0.85rem; color: var(--gris-1); line-height: 1.7; letter-spacing: -0.01em; }
     .forward34-note strong { color: var(--negro); }
+    @keyframes pulse-bolt { 0%,100% { transform: scale(1); } 50% { transform: scale(1.2) rotate(5deg); } }
 
     /* AUDIENCIAS */
     #audiencias { background: var(--blanco); padding: 7rem 2.5rem; border-top: 1px solid var(--borde); }
@@ -369,7 +370,9 @@
           <h2><em>Descúbrete</em> — experiencias, conversaciones y referentes</h2>
         </div>
         <div>
-          
+          <a href="https://www.forward34.com/index.html" target="_blank" style="display:inline-block; margin-bottom:0.8rem;">
+            <img src="images/logo_f34.png" alt="Forward34" style="height:44px; width:auto; filter:brightness(0); transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1), filter 0.3s ease;" onmouseover="this.style.transform='scale(1.15) rotate(-3deg)'; this.style.filter='brightness(0.2) sepia(1) saturate(5) hue-rotate(340deg)'" onmouseout="this.style.transform='scale(1) rotate(0deg)'; this.style.filter='brightness(0)'">
+          </a>
           <p>Forward34 — implementación, sistemas e inteligencia aplicada para organizaciones que decidieron avanzar.</p>
           <a href="https://www.forward34.com/index.html" target="_blank" style="display:inline-flex; align-items:center; gap:0.4rem; font-size:0.78rem; font-weight:500; color:var(--negro); text-decoration:none; margin-top:0.8rem; border:1px solid var(--borde); padding:0.45rem 1rem; border-radius:6px; transition:all 0.15s;" onmouseover="this.style.borderColor='var(--negro)'" onmouseout="this.style.borderColor='var(--borde)'">Visitar Forward34 →</a>
         </div>
@@ -381,13 +384,15 @@
         <div class="format-item reveal d4"><span class="format-icon">🤖</span><h3>Tecnología SaaS</h3><p>Productos avanzados con automatizaciones inteligentes y soluciones flexibles.</p></div>
         <div class="format-item reveal d5"><span class="format-icon">🌐</span><h3>Comunidad Global</h3><p>Talento, empresas e innovación conectados para acelerar el avance.</p></div>
       </div>
-      <div class="forward34-note reveal" style="display:flex; align-items:flex-start; gap:1.5rem;">
-        <span style="font-size:2rem; flex-shrink:0;">⚡</span>
-        <div>
+      <div class="forward34-note reveal" style="display:flex; align-items:center; gap:1.5rem;">
+        <span style="font-size:2.5rem; flex-shrink:0; animation: pulse-bolt 2s ease infinite;">⚡</span>
+        <div style="flex:1;">
           <p><strong>Nacimos de conversaciones que exigieron EJECUCIÓN.</strong> Forward34 es la capa de implementación para organizaciones que decidieron avanzar después de los espacios activados desde Descúbrete+. La conversación abre la puerta. La ejecución es lo que cambia todo.</p>
-          <div style="display:flex; align-items:center; gap:1.2rem; margin-top:1.2rem; flex-wrap:wrap;">
-            <img src="images/logo_f34.png" alt="Forward34" style="height:40px; width:auto; filter:brightness(0); transition:transform 0.2s ease;" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
-            <a href="https://www.forward34.com/index.html" target="_blank" style="display:inline-flex; align-items:center; gap:0.4rem; font-size:0.78rem; font-weight:500; color:var(--negro); text-decoration:none; border:1px solid var(--borde); padding:0.45rem 1rem; border-radius:6px; transition:all 0.15s;" onmouseover="this.style.borderColor='var(--negro)'" onmouseout="this.style.borderColor='var(--borde)'">Conoce Forward34 →</a>
+          <div style="display:flex; align-items:center; gap:1.5rem; margin-top:1.2rem; flex-wrap:wrap;">
+            <a href="https://www.forward34.com/index.html" target="_blank" style="display:inline-block;">
+              <img src="images/logo_f34.png" alt="Forward34" style="height:56px; width:auto; filter:brightness(0); transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1), filter 0.3s ease;" onmouseover="this.style.transform='scale(1.15) rotate(-3deg)'; this.style.filter='brightness(0.2) sepia(1) saturate(5) hue-rotate(340deg)'" onmouseout="this.style.transform='scale(1) rotate(0deg)'; this.style.filter='brightness(0)'">
+            </a>
+            <a href="https://www.forward34.com/index.html" target="_blank" style="display:inline-flex; align-items:center; gap:0.4rem; font-size:0.78rem; font-weight:500; color:var(--negro); text-decoration:none; border:1px solid var(--borde); padding:0.45rem 1rem; border-radius:6px; transition:all 0.15s;" onmouseover="this.style.borderColor='var(--negro)'; this.style.background='var(--negro)'; this.style.color='white'" onmouseout="this.style.borderColor='var(--borde)'; this.style.background='transparent'; this.style.color='var(--negro)'">Conoce Forward34 →</a>
           </div>
         </div>
       </div>
