@@ -125,6 +125,18 @@
     .service-link { font-size: 0.78rem; font-weight: 500; color: var(--negro); text-decoration: none; transition: color 0.15s; }
     .service-link:hover { color: var(--naranja); }
 
+    /* VIDEOS */
+    #videos { background: var(--negro); padding: 6rem 2.5rem; }
+    .videos-inner { max-width: 1100px; margin: 0 auto; }
+    .videos-header { text-align: center; margin-bottom: 3.5rem; }
+    .videos-header h2 { font-family: 'DM Serif Display', serif; font-size: clamp(1.6rem, 2.8vw, 2.4rem); font-weight: 400; letter-spacing: -0.03em; color: var(--blanco); }
+    .videos-header h2 em { font-style: italic; color: var(--naranja); }
+    .videos-header p { font-size: 0.88rem; color: rgba(255,255,255,0.4); margin-top: 0.8rem; letter-spacing: -0.01em; }
+    .videos-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+    .video-embed { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); }
+    .video-embed iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+    @media (max-width: 768px) { .videos-grid { grid-template-columns: 1fr; } #videos { padding: 4rem 1.5rem; } }
+
     /* COMO LO HACEMOS */
     #como-lo-hacemos { background: var(--fondo); padding: 7rem 2.5rem; border-top: 1px solid var(--borde); }
     .como-inner { max-width: 1100px; margin: 0 auto; }
@@ -280,7 +292,7 @@
         <a href="programas.html" class="service-link">Conocer más →</a>
       </div>
       <div class="service-card reveal d1">
-        <img src="images/podcast.png" alt="Podcast" class="service-img">
+        <img src="images/podcast.jpg" alt="Podcast" class="service-img">
         <span class="service-num">04</span>
         <h3>Podcast</h3>
         <p>Contenido de alto valor para líderes en movimiento. Episodios con referentes internacionales sobre liderazgo, tecnología y propósito.</p>
@@ -299,6 +311,25 @@
         <h3>Comunidad</h3>
         <p>Conectamos talento, empresas e innovación para acelerar crecimiento y colaboración. Una red de personas que decidieron avanzar.</p>
         <a href="programas.html" class="service-link">Unirte →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIDEOS -->
+  <section id="videos">
+    <div class="videos-inner">
+      <div class="videos-header reveal">
+        <span class="section-label" style="color:rgba(255,255,255,0.3);">Descúbrete+ en acción</span>
+        <h2>Mira lo que <em>vivimos</em></h2>
+        <p>Experiencias reales de quienes ya forman parte del ecosistema.</p>
+      </div>
+      <div class="videos-grid">
+        <div class="video-embed reveal d1">
+          <iframe src="https://www.youtube.com/embed/CGtsdM6h9DI" title="Descúbrete+ Video 1" allowfullscreen></iframe>
+        </div>
+        <div class="video-embed reveal d2">
+          <iframe src="https://www.youtube.com/embed/VC6rZNek18s" title="Descúbrete+ Video 2" allowfullscreen></iframe>
+        </div>
       </div>
     </div>
   </section>
