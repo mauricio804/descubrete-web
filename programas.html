@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programas | Descúbrete+</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --naranja: #F26522;
+      --azul: #1B3A6B;
+      --dorado: #B8956A;
+      --fondo: #FAFAFA;
+      --fondo-2: #F4F4F5;
+      --negro: #09090B;
+      --gris-1: #71717A;
+      --gris-2: #A1A1AA;
+      --borde: #E4E4E7;
+      --blanco: #FFFFFF;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--fondo); color: var(--negro); overflow-x: hidden; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2.5rem; height: 64px;
+      background: rgba(250,250,250,0.88); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--borde);
+    }
+    .nav-logo img { height: 52px; width: auto; }
+    .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+    .nav-links a { text-decoration: none; font-size: 0.82rem; font-weight: 450; color: var(--gris-1); transition: color 0.15s; letter-spacing: -0.01em; }
+    .nav-links a:hover { color: var(--negro); }
+    .nav-links a.active { color: var(--negro); font-weight: 500; }
+    .nav-cta { background: var(--negro) !important; color: white !important; padding: 0.5rem 1.2rem !important; border-radius: 6px; font-weight: 500 !important; }
+    .nav-cta:hover { opacity: 0.8; }
+
+    /* HERO */
+    #hero {
+      min-height: 44vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 8rem 2rem 5rem;
+      background: var(--blanco); border-bottom: 1px solid var(--borde);
+      position: relative; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: url('images/summit.jpg') center/cover no-repeat;
+      opacity: 0.08; pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 1; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--fondo-2); border: 1px solid var(--borde);
+      padding: 0.35rem 0.9rem; border-radius: 100px;
+      font-size: 0.72rem; font-weight: 500; color: var(--gris-1);
+      margin-bottom: 1.5rem;
+      opacity: 0; animation: fade-up 0.6s ease 0.1s forwards;
+    }
+    .badge-dot { width: 6px; height: 6px; background: var(--naranja); border-radius: 50%; animation: pulse 2s ease infinite; }
+    @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.4; } }
+    .hero-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 400;
+      line-height: 1.1; letter-spacing: -0.03em; color: var(--negro);
+      max-width: 700px; margin-bottom: 1.2rem;
+      opacity: 0; animation: fade-up 0.6s ease 0.2s forwards;
+    }
+    .hero-title em { font-style: italic; color: var(--naranja); }
+    .hero-subtitle {
+      font-size: 0.95rem; color: var(--gris-1); max-width: 520px;
+      line-height: 1.7; letter-spacing: -0.01em;
+      opacity: 0; animation: fade-up 0.6s ease 0.3s forwards;
+    }
+    @keyframes fade-up { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+
+    /* SECTION LABEL */
+    .section-label { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gris-2); margin-bottom: 1rem; display: block; }
+
+    /* PROGRAMAS */
+    #programas { padding: 7rem 2.5rem; background: var(--blanco); }
+    .programas-inner { max-width: 1100px; margin: 0 auto; }
+    .programas-header { margin-bottom: 4rem; }
+    .programas-header h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 400;
+      letter-spacing: -0.03em; max-width: 500px; line-height: 1.2;
+    }
+    .programas-header h2 em { font-style: italic; color: var(--naranja); }
+
+    /* GRID PROGRAMAS */
+    .programas-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    .programa-card {
+      background: var(--blanco);
+      border: 1px solid var(--borde);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .programa-card:hover {
+      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+      transform: translateY(-2px);
+    }
+    .programa-img {
+      width: 100%; height: 200px;
+      object-fit: cover; display: block;
+    }
+    .programa-body { padding: 1.8rem; }
+    .programa-num {
+      font-size: 0.62rem; font-weight: 600; color: var(--gris-2);
+      letter-spacing: 0.1em; margin-bottom: 0.8rem; display: block;
+    }
+    .programa-card h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.3rem; font-weight: 400; letter-spacing: -0.02em;
+      color: var(--negro); margin-bottom: 0.7rem;
+    }
+    .programa-card p {
+      font-size: 0.83rem; color: var(--gris-1);
+      line-height: 1.7; letter-spacing: -0.01em; margin-bottom: 1.5rem;
+    }
+    .programa-tag {
+      display: inline-block;
+      font-size: 0.7rem; font-weight: 500;
+      padding: 0.3rem 0.8rem; border-radius: 100px;
+      background: var(--fondo-2); color: var(--gris-1);
+      border: 1px solid var(--borde); margin-bottom: 1.2rem;
+    }
+    .programa-link {
+      font-size: 0.8rem; font-weight: 500; color: var(--negro);
+      text-decoration: none; transition: color 0.15s;
+      display: inline-flex; align-items: center; gap: 0.3rem;
+    }
+    .programa-link:hover { color: var(--naranja); }
+
+    /* CTA SECTION */
+    #cta {
+      background: var(--negro); padding: 6rem 2.5rem;
+      text-align: center;
+    }
+    .cta-inner { max-width: 640px; margin: 0 auto; }
+    .cta-inner h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 400;
+      letter-spacing: -0.03em; color: var(--blanco); margin-bottom: 1rem;
+    }
+    .cta-inner h2 em { font-style: italic; color: var(--naranja); }
+    .cta-inner p {
+      font-size: 0.9rem; color: rgba(255,255,255,0.5);
+      line-height: 1.7; margin-bottom: 2.5rem; letter-spacing: -0.01em;
+    }
+    .btn-naranja {
+      background: var(--naranja); color: white;
+      padding: 0.85rem 2.2rem; border-radius: 8px;
+      font-size: 0.88rem; font-weight: 500; text-decoration: none;
+      transition: opacity 0.15s; letter-spacing: -0.01em;
+      display: inline-block;
+    }
+    .btn-naranja:hover { opacity: 0.85; }
+
+    /* REVEAL */
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: 0.05s; }
+    .d2 { transition-delay: 0.12s; }
+    .d3 { transition-delay: 0.19s; }
+    .d4 { transition-delay: 0.26s; }
+    .d5 { transition-delay: 0.33s; }
+    .d6 { transition-delay: 0.40s; }
+
+    /* FOOTER */
+    footer { background: var(--negro); padding: 3rem 2.5rem; }
+    .footer-top { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; margin-bottom: 2rem; }
+    .footer-logo img { height: 32px; width: auto; filter: brightness(10); opacity: 0.55; }
+    .footer-links { display: flex; gap: 2rem; list-style: none; }
+    .footer-links a { color: rgba(255,255,255,0.3); text-decoration: none; font-size: 0.76rem; transition: color 0.15s; }
+    .footer-links a:hover { color: rgba(255,255,255,0.6); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.05); padding-top: 1.5rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+    .footer-bottom p { font-size: 0.7rem; color: rgba(255,255,255,0.2); }
+    .footer-email a { color: var(--naranja); text-decoration: none; font-size: 0.76rem; }
+
+    /* DIVIDER */
+    hr.divider { border: none; border-top: 1px solid var(--borde); }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      nav { padding: 0 1.5rem; }
+      #programas { padding: 5rem 1.5rem; }
+      .programas-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+      #cta { padding: 4rem 1.5rem; }
+      footer { padding: 2rem 1.5rem; }
+      .footer-top { flex-direction: column; }
+      .footer-bottom { flex-direction: column; }
+    }
+    @media (min-width: 901px) and (max-width: 1100px) {
+      .programas-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-logo"><img src="images/logo.png" alt="Descúbrete+"></div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="programas.html" class="active">Programas</a></li>
+      <li><a href="agentic.html">Agentic</a></li>
+      <li><a href="nosotros.html">Nosotros</a></li>
+      <li><a href="contacto.html" class="nav-cta">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="hero-badge"><span class="badge-dot"></span>Ecosistema Descúbrete+</div>
+      <h1 class="hero-title">Experiencias diseñadas para<br><em>transformar</em> personas y organizaciones</h1>
+      <p class="hero-subtitle">Desde grandes foros hasta conversaciones íntimas — cada programa está diseñado para generar un cambio real y medible.</p>
+    </div>
+  </section>
+
+  <!-- PROGRAMAS -->
+  <section id="programas">
+    <div class="programas-inner">
+      <div class="programas-header reveal">
+        <span class="section-label">Nuestros programas</span>
+        <h2>Todo lo que hacemos,<br><em>con propósito</em></h2>
+      </div>
+
+      <div class="programas-grid">
+
+        <!-- 01 SUMMIT -->
+        <div class="programa-card reveal d1">
+          <img src="images/summit.jpg" alt="Descúbrete Summit" class="programa-img">
+          <div class="programa-body">
+            <span class="programa-num">01</span>
+            <span class="programa-tag">Evento anual</span>
+            <h3>Descúbrete Summit</h3>
+            <p>El evento de mayor impacto para líderes que buscan claridad, criterio y conexión. Speakers internacionales, comunidad de alto nivel y experiencias que transforman.</p>
+            <a href="contacto.html" class="programa-link">Más información →</a>
+          </div>
+        </div>
+
+        <!-- 02 TALKS -->
+        <div class="programa-card reveal d2">
+          <img src="images/talks.jpg" alt="Descúbrete Talks" class="programa-img">
+          <div class="programa-body">
+            <span class="programa-num">02</span>
+            <span class="programa-tag">Conferencias</span>
+            <h3>Descúbrete Talks</h3>
+            <p>Conversaciones con referentes de clase mundial. Criterio, liderazgo y visión para adelantarte a tu competencia y tomar decisiones con claridad.</p>
+            <a href="contacto.html" class="programa-link">Más información →</a>
+          </div>
+        </div>
+
+        <!-- 03 CORPORATE -->
+        <div class="programa-card reveal d3">
+          <img src="images/corporate.jpg" alt="Corporate Training" class="programa-img">
+          <div class="programa-body">
+            <span class="programa-num">03</span>
+            <span class="programa-tag">Empresas</span>
+            <h3>Corporate Training</h3>
+            <p>Entrenamiento ejecutivo para desarrollar habilidades y capacidades específicas aplicables a negocios reales. Para equipos que quieren resultados tangibles.</p>
+            <a href="contacto.html" class="programa-link">Solicitar información →</a>
+          </div>
+        </div>
+
+        <!-- 04 PODCAST -->
+        <div class="programa-card reveal d4">
+          <img src="images/podcast.png" alt="Podcast" class="programa-img">
+          <div class="programa-body">
+            <span class="programa-num">04</span>
+            <span class="programa-tag">Contenido</span>
+            <h3>Podcast</h3>
+            <p>Contenido de alto valor para líderes en movimiento. Episodios con referentes internacionales sobre liderazgo, tecnología y propósito. Disponible en todas las plataformas.</p>
+            <a href="https://open.spotify.com/show/589HHCGb9Mqo6MuzjCmnbz" target="_blank" class="programa-link">Escuchar en Spotify →</a>
+          </div>
+        </div>
+
+        <!-- 05 FIRESIDE -->
+        <div class="programa-card reveal d5">
+          <img src="images/fireside.jpg" alt="Fireside Chats" class="programa-img">
+          <div class="programa-body">
+            <span class="programa-num">05</span>
+            <span class="programa-tag">Exclusivo</span>
+            <h3>Fireside Chats</h3>
+            <p>Conversaciones íntimas con referentes internacionales. Acceso a perspectivas que no encuentras en ningún otro foro de la región. Formato íntimo y directo.</p>
+            <a href="contacto.html" class="programa-link">Más información →</a>
+          </div>
+        </div>
+
+        <!-- 06 COMUNIDAD -->
+        <div class="programa-card reveal d6">
+          <img src="images/comunidad.jpg" alt="Comunidad" class="programa-img">
+          <div class="programa-body">
+            <span class="programa-num">06</span>
+            <span class="programa-tag">Red</span>
+            <h3>Comunidad</h3>
+            <p>Conectamos talento, empresas e innovación para acelerar crecimiento y colaboración. Una red de personas que decidieron avanzar y no quedarse atrás.</p>
+            <a href="contacto.html" class="programa-link">Unirte →</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- CTA -->
+  <section id="cta">
+    <div class="cta-inner reveal">
+      <h2>¿Listo para dar el<br><em>siguiente paso</em>?</h2>
+      <p>Cuéntanos tu objetivo y te ayudamos a encontrar el programa o experiencia que mejor se adapte a lo que necesitas.</p>
+      <a href="contacto.html" class="btn-naranja">Contactar ahora</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-logo"><img src="images/logo.png" alt="Descúbrete+"></div>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="programas.html">Programas</a></li>
+        <li><a href="agentic.html">Agentic</a></li>
+        <li><a href="nosotros.html">Nosotros</a></li>
+      </ul>
+      <div style="font-size:0.76rem; color:rgba(255,255,255,0.3);">
+        <a href="https://instagram.com/descubrete_mx" target="_blank" style="color:var(--naranja); text-decoration:none;">@descubrete_mx</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>©2026 por Descúbrete+ · Forward34 · Todos los derechos reservados</p>
+      <div class="footer-email"><a href="mailto:contacto@descubrete.mx">contacto@descubrete.mx</a></div>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
