@@ -52,9 +52,29 @@
     }
     .hero-bg {
   position: absolute; inset: 0;
-  background: url('images/talks.jpg') center/cover no-repeat;
   opacity: 1;
   pointer-events: none;
+  animation: heroCycle 27s infinite;
+}
+@keyframes heroCycle {
+  0%    { background-image: url('images/hero.jpg'); background-size: cover; background-position: center; }
+  11%   { background-image: url('images/hero.jpg'); background-size: cover; background-position: center; }
+  12%   { background-image: url('images/hero1.jpg'); background-size: cover; background-position: center; }
+  22%   { background-image: url('images/hero1.jpg'); background-size: cover; background-position: center; }
+  23%   { background-image: url('images/hero2.jpg'); background-size: cover; background-position: center; }
+  33%   { background-image: url('images/hero2.jpg'); background-size: cover; background-position: center; }
+  34%   { background-image: url('images/hero3.jpg'); background-size: cover; background-position: center; }
+  44%   { background-image: url('images/hero3.jpg'); background-size: cover; background-position: center; }
+  45%   { background-image: url('images/hero4.jpg'); background-size: cover; background-position: center; }
+  55%   { background-image: url('images/hero4.jpg'); background-size: cover; background-position: center; }
+  56%   { background-image: url('images/hero5.jpg'); background-size: cover; background-position: center; }
+  66%   { background-image: url('images/hero5.jpg'); background-size: cover; background-position: center; }
+  67%   { background-image: url('images/hero6.jpg'); background-size: cover; background-position: center; }
+  77%   { background-image: url('images/hero6.jpg'); background-size: cover; background-position: center; }
+  78%   { background-image: url('images/hero7.jpg'); background-size: cover; background-position: center; }
+  88%   { background-image: url('images/hero7.jpg'); background-size: cover; background-position: center; }
+  89%   { background-image: url('images/hero8.jpg'); background-size: cover; background-position: center; }
+  100%  { background-image: url('images/hero8.jpg'); background-size: cover; background-position: center; }
 }
 .hero-bg::after {
   content: '';
