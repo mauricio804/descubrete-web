@@ -3,27 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- SEO -->
-  <meta name="google-site-verification" content="xY6KDMJOr_DT9B_4Hv17sqi6R_M0AztFs2GZb9r-oIk">
-  <meta name="description" content="Descúbrete+ es un ecosistema de desarrollo humano, liderazgo e inteligencia artificial. Summits, programas corporativos y experiencias presenciales en México.">
-  <meta name="robots" content="index, follow">
-  <meta name="author" content="Descúbrete+">
-  <link rel="canonical" href="https://descubrete.mx/">
-  <!-- Open Graph -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://descubrete.mx/">
-  <meta property="og:title" content="Descúbrete+ | Transformamos personas y organizaciones">
-  <meta property="og:description" content="Descúbrete+ es un ecosistema de desarrollo humano, liderazgo e inteligencia artificial. Summits, programas corporativos y experiencias presenciales en México.">
-  <meta property="og:image" content="https://descubrete.mx/images/hero.jpg">
-  <meta property="og:locale" content="es_MX">
-  <meta property="og:site_name" content="Descúbrete+">
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Descúbrete+ | Transformamos personas y organizaciones">
-  <meta name="twitter:description" content="Descúbrete+ es un ecosistema de desarrollo humano, liderazgo e inteligencia artificial. Summits, programas corporativos y experiencias presenciales en México.">
-  <meta name="twitter:image" content="https://descubrete.mx/images/hero.jpg">
-<link rel="icon" type="image/png" href="images/favicon.png">
-  <title>Descúbrete+ | Transformamos personas y organizaciones</title>
+  <meta name="description" content="Eventos, programas corporativos y comunidad para líderes en México y LATAM. Desarrolla liderazgo, inteligencia artificial y criterio ejecutivo con Descúbrete+.">
+<meta property="og:title" content="Descúbrete+ | Liderazgo, IA y Desarrollo Profesional en México">
+<meta property="og:description" content="Eventos, programas corporativos y comunidad para líderes en México y LATAM. Desarrolla liderazgo, inteligencia artificial y criterio ejecutivo con Descúbrete+.">
+<meta name="twitter:title" content="Descúbrete+ | Liderazgo, IA y Desarrollo Profesional en México">
+<meta name="twitter:description" content="Eventos, programas corporativos y comunidad para líderes en México y LATAM. Desarrolla liderazgo, inteligencia artificial y criterio ejecutivo con Descúbrete+.">
+  <title>Descúbrete+ | Liderazgo, IA y Desarrollo Profesional en México</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -58,40 +43,24 @@
     .nav-cta:hover { opacity: 0.8; }
 
     /* HERO */
-    @keyframes fadeSlide {
-      0%   { opacity: 0; }
-      8%   { opacity: 1; }
-      25%  { opacity: 1; }
-      33%  { opacity: 0; }
-      100% { opacity: 0; }
-    }
     #hero {
       min-height: 100vh; display: flex; flex-direction: column;
       align-items: center; justify-content: center;
       text-align: center; padding: 8rem 2rem 5rem;
+      background: var(--blanco);
       position: relative; overflow: hidden;
-      background: var(--negro);
     }
-    .hero-slide {
-      position: absolute; inset: 0;
-      background-size: cover; background-position: center;
-      opacity: 0;
-      animation: fadeSlide 24s infinite;
-    }
-    .hero-slide:nth-child(1) { background-image: url('images/hero1.jpg'); animation-delay: 0s; }
-    .hero-slide:nth-child(2) { background-image: url('images/hero2.jpg'); animation-delay: 3s; }
-    .hero-slide:nth-child(3) { background-image: url('images/hero3.jpg'); animation-delay: 6s; }
-    .hero-slide:nth-child(4) { background-image: url('images/hero4.jpg'); animation-delay: 9s; }
-    .hero-slide:nth-child(5) { background-image: url('images/hero5.jpg'); animation-delay: 12s; }
-    .hero-slide:nth-child(6) { background-image: url('images/hero6.jpg'); animation-delay: 15s; }
-    .hero-slide:nth-child(7) { background-image: url('images/hero7.jpg'); animation-delay: 18s; }
-    .hero-slide:nth-child(8) { background-image: url('images/hero8.jpg'); animation-delay: 21s; }
-    .hero-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.65) 50%, rgba(0,0,0,0.8) 100%);
-      z-index: 1;
-    }
-    .hero-bg { display: none; }
+    .hero-bg {
+  position: absolute; inset: 0;
+  background: url('images/talks.jpg') center/cover no-repeat;
+  opacity: 1;
+  pointer-events: none;
+}
+.hero-bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(250,250,250,0.85) 0%, rgba(250,250,250,0.75) 100%);
+}
     /* SERVICE IMAGES */
     .service-img {
       width: 100%; height: 160px;
@@ -102,9 +71,9 @@
     }
     .hero-badge {
       display: inline-flex; align-items: center; gap: 0.5rem;
-      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      background: var(--fondo-2); border: 1px solid var(--borde);
       padding: 0.35rem 0.9rem; border-radius: 100px;
-      font-size: 0.72rem; font-weight: 500; color: rgba(255,255,255,0.7);
+      font-size: 0.72rem; font-weight: 500; color: var(--gris-1);
       margin-bottom: 2.5rem; opacity: 0; animation: fade-up 0.6s ease 0.1s forwards;
     }
     .badge-dot { width: 6px; height: 6px; background: var(--naranja); border-radius: 50%; animation: pulse 2s ease infinite; }
@@ -112,23 +81,22 @@
     .hero-title {
       font-family: 'DM Serif Display', serif;
       font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 400;
-      line-height: 1.1; letter-spacing: -0.03em; color: var(--blanco);
+      line-height: 1.1; letter-spacing: -0.03em; color: var(--negro);
       max-width: 820px; margin-bottom: 1.8rem;
       opacity: 0; animation: fade-up 0.6s ease 0.2s forwards;
     }
     .hero-title em { font-style: italic; color: var(--naranja); }
     .hero-subtitle {
-      font-size: 1rem; color: rgba(255,255,255,0.7); max-width: 560px;
+      font-size: 1rem; color: var(--gris-1); max-width: 560px;
       line-height: 1.7; margin-bottom: 1rem;
       opacity: 0; animation: fade-up 0.6s ease 0.3s forwards; letter-spacing: -0.01em;
     }
     .hero-subtitle-2 {
-      font-size: 0.88rem; color: rgba(255,255,255,0.8); max-width: 520px;
+      font-size: 0.88rem; color: var(--gris-2); max-width: 520px;
       line-height: 1.7; margin-bottom: 2.5rem; font-style: italic;
       opacity: 0; animation: fade-up 0.6s ease 0.35s forwards; letter-spacing: -0.01em;
     }
-    .hero-buttons { display: flex; gap: 0.8rem; flex-wrap: wrap; justify-content: center; opacity: 0; animation: fade-up 0.6s ease 0.4s forwards; margin-bottom: 5rem; position: relative; z-index: 2; }
-    .hero-badge, .hero-title, .hero-subtitle, .hero-subtitle-2, .hero-pillars { position: relative; z-index: 2; text-shadow: 0 2px 12px rgba(0,0,0,0.5); }
+    .hero-buttons { display: flex; gap: 0.8rem; flex-wrap: wrap; justify-content: center; opacity: 0; animation: fade-up 0.6s ease 0.4s forwards; margin-bottom: 5rem; }
     .btn-dark { background: var(--negro); color: white; padding: 0.75rem 1.8rem; border-radius: 8px; font-size: 0.85rem; font-weight: 500; text-decoration: none; transition: opacity 0.15s; letter-spacing: -0.01em; display: inline-block; }
     .btn-dark:hover { opacity: 0.8; }
     .btn-light { background: var(--blanco); color: var(--negro); padding: 0.75rem 1.8rem; border-radius: 8px; border: 1px solid var(--borde); font-size: 0.85rem; font-weight: 500; text-decoration: none; transition: background 0.15s; letter-spacing: -0.01em; display: inline-block; }
@@ -136,9 +104,9 @@
     .hero-pillars {
       opacity: 0; animation: fade-up 0.6s ease 0.5s forwards;
       display: flex; gap: 3rem; justify-content: center; flex-wrap: wrap;
-      padding-top: 3rem; border-top: 1px solid rgba(255,255,255,0.15); width: 100%; max-width: 600px;
+      padding-top: 3rem; border-top: 1px solid var(--borde); width: 100%; max-width: 600px;
     }
-    .hero-pillars span { font-family: 'DM Serif Display', serif; font-size: 0.95rem; color: rgba(255,255,255,0.9); font-style: italic; }
+    .hero-pillars span { font-family: 'DM Serif Display', serif; font-size: 0.95rem; color: var(--gris-2); font-style: italic; }
     @keyframes fade-up { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
 
     /* SECTIONS */
@@ -162,18 +130,6 @@
     .service-link { font-size: 0.78rem; font-weight: 500; color: var(--negro); text-decoration: none; transition: color 0.15s; }
     .service-link:hover { color: var(--naranja); }
 
-    /* VIDEOS */
-    #videos { background: var(--negro); padding: 6rem 2.5rem; }
-    .videos-inner { max-width: 1100px; margin: 0 auto; }
-    .videos-header { text-align: center; margin-bottom: 3.5rem; }
-    .videos-header h2 { font-family: 'DM Serif Display', serif; font-size: clamp(1.6rem, 2.8vw, 2.4rem); font-weight: 400; letter-spacing: -0.03em; color: var(--blanco); }
-    .videos-header h2 em { font-style: italic; color: var(--naranja); }
-    .videos-header p { font-size: 0.88rem; color: rgba(255,255,255,0.4); margin-top: 0.8rem; letter-spacing: -0.01em; }
-    .videos-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
-    .video-embed { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); }
-    .video-embed iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
-    @media (max-width: 768px) { .videos-grid { grid-template-columns: 1fr; } #videos { padding: 4rem 1.5rem; } }
-
     /* COMO LO HACEMOS */
     #como-lo-hacemos { background: var(--fondo); padding: 7rem 2.5rem; border-top: 1px solid var(--borde); }
     .como-inner { max-width: 1100px; margin: 0 auto; }
@@ -190,8 +146,6 @@
     .forward34-note { margin-top: 3rem; padding: 2rem; border: 1px solid var(--borde); border-radius: 10px; background: var(--blanco); display: flex; align-items: center; gap: 1.5rem; }
     .forward34-note p { font-size: 0.85rem; color: var(--gris-1); line-height: 1.7; letter-spacing: -0.01em; }
     .forward34-note strong { color: var(--negro); }
-    @keyframes pulse-bolt { 0%,100% { transform: scale(1); } 50% { transform: scale(1.2) rotate(5deg); } }
-    @keyframes float-logo { 0%,100% { transform: translateY(0) scale(1); } 40% { transform: translateY(-4px) scale(1.04); } 70% { transform: translateY(2px) scale(0.98); } }
 
     /* AUDIENCIAS */
     #audiencias { background: var(--blanco); padding: 7rem 2.5rem; border-top: 1px solid var(--borde); }
@@ -275,16 +229,8 @@
 
   <!-- HERO -->
   <section id="hero">
-    <div class="hero-slide"></div>
-    <div class="hero-slide"></div>
-    <div class="hero-slide"></div>
-    <div class="hero-slide"></div>
-    <div class="hero-slide"></div>
-    <div class="hero-slide"></div>
-    <div class="hero-slide"></div>
-    <div class="hero-slide"></div>
-    <div class="hero-overlay"></div>
-    <div class="hero-badge"><span class="badge-dot"></span><span><span>Inspírate · Aprende · Evoluciona</span></span></div>
+    <div class="hero-bg"></div>
+    <div class="hero-badge"><span class="badge-dot"></span>Inspírate · Aprende · Evoluciona</div>
     <h1 class="hero-title">
       Experiencias y herramientas<br>para crecer con <em>claridad,<br>criterio y conexión</em>
     </h1>
@@ -299,7 +245,9 @@
       <a href="agentic.html" class="btn-light">Explora Agentic26 →</a>
     </div>
     <div class="hero-pillars">
-    <span>Ciencia para comprendernos</span><span style="color:#F26522;margin:0 0.8rem;">·</span><span>Tecnología para potenciarnos</span><span style="color:#F26522;margin:0 0.8rem;">·</span><span>Consciencia para transformarnos</span>
+      <span>Ciencia para comprendernos</span>
+      <span>Tecnología para potenciarnos</span>
+      <span>Consciencia para transformarnos</span>
     </div>
   </section>
 
@@ -340,6 +288,7 @@
         <img src="images/podcast.png" alt="Podcast" class="service-img">
         <span class="service-num">04</span>
         <h3>Podcast</h3>
+        
         <p>Contenido de alto valor para líderes en movimiento. Episodios con referentes internacionales sobre liderazgo, tecnología y propósito.</p>
         <a href="programas.html" class="service-link">Escuchar →</a>
       </div>
@@ -360,25 +309,6 @@
     </div>
   </section>
 
-  <!-- VIDEOS -->
-  <section id="videos">
-    <div class="videos-inner">
-      <div class="videos-header reveal">
-        <span class="section-label" style="color:rgba(255,255,255,0.3);">Descúbrete+ en acción</span>
-        <h2>Mira lo que <em>vivimos</em></h2>
-        <p>Experiencias reales de quienes ya forman parte del ecosistema.</p>
-      </div>
-      <div class="videos-grid">
-        <div class="video-embed reveal d1">
-          <iframe src="https://www.youtube.com/embed/CGtsdM6h9DI?autoplay=1&mute=1&loop=1&playlist=CGtsdM6h9DI" title="Descúbrete+ Video 1" allowfullscreen allow="autoplay"></iframe>
-        </div>
-        <div class="video-embed reveal d2">
-          <iframe src="https://www.youtube.com/embed/VC6rZNek18s?autoplay=1&mute=1&loop=1&playlist=VC6rZNek18s" title="Descúbrete+ Video 2" allowfullscreen allow="autoplay"></iframe>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <hr class="divider">
 
   <!-- COMO LO HACEMOS -->
@@ -389,10 +319,7 @@
           <span class="section-label">Cómo lo hacemos</span>
           <h2><em>Descúbrete</em> — experiencias, conversaciones y referentes</h2>
         </div>
-        <div>
-          <p>Forward34 — implementación, sistemas e inteligencia aplicada para organizaciones que decidieron avanzar.</p>
-          <a href="https://www.forward34.com/index.html" target="_blank" style="display:inline-flex; align-items:center; gap:0.4rem; font-size:0.78rem; font-weight:500; color:var(--negro); text-decoration:none; margin-top:0.8rem; border:1px solid var(--borde); padding:0.45rem 1rem; border-radius:6px; transition:all 0.15s;" onmouseover="this.style.borderColor='var(--negro)'" onmouseout="this.style.borderColor='var(--borde)'">Visitar Forward34 →</a>
-        </div>
+        <p>Forward34 — implementación, sistemas e inteligencia aplicada para organizaciones que decidieron avanzar.</p>
       </div>
       <div class="formats-grid">
         <div class="format-item reveal d1"><span class="format-icon">🎯</span><h3>Foros Estratégicos</h3><p>Visión y claridad estratégica. Identifica oportunidades y adelántate a tu competencia.</p></div>
@@ -401,13 +328,9 @@
         <div class="format-item reveal d4"><span class="format-icon">🤖</span><h3>Tecnología SaaS</h3><p>Productos avanzados con automatizaciones inteligentes y soluciones flexibles.</p></div>
         <div class="format-item reveal d5"><span class="format-icon">🌐</span><h3>Comunidad Global</h3><p>Talento, empresas e innovación conectados para acelerar el avance.</p></div>
       </div>
-      <div class="forward34-note reveal" style="display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap;">
-        <span style="font-size:2rem; flex-shrink:0; line-height:1; animation: pulse-bolt 2s ease infinite;">⚡</span>
-        <a href="https://www.forward34.com/index.html" target="_blank" style="display:inline-flex; align-items:center; flex-shrink:0;">
-          <img src="images/logo_f34.png" alt="Forward34" style="height:72px; width:auto; filter:brightness(0); animation: float-logo 3s ease-in-out infinite; transition:filter 0.3s ease;" onmouseover="this.style.filter='brightness(0.2) sepia(1) saturate(5) hue-rotate(340deg)'" onmouseout="this.style.filter='brightness(0)'">
-        </a>
-        <p style="font-size:0.85rem; color:var(--gris-1); line-height:1.7; letter-spacing:-0.01em; flex:1; min-width:200px;"><strong style="color:var(--negro);">Nacimos de conversaciones que exigieron EJECUCIÓN.</strong> Forward34 es la capa de implementación para organizaciones que decidieron avanzar después de los espacios activados desde Descúbrete+. La conversación abre la puerta. La ejecución es lo que cambia todo.</p>
-        <a href="https://www.forward34.com/index.html" target="_blank" style="display:inline-flex; align-items:center; gap:0.4rem; font-size:0.78rem; font-weight:500; color:var(--negro); text-decoration:none; border:1px solid var(--borde); padding:0.45rem 1rem; border-radius:6px; transition:all 0.15s; flex-shrink:0; white-space:nowrap;" onmouseover="this.style.borderColor='var(--negro)'; this.style.background='var(--negro)'; this.style.color='white'" onmouseout="this.style.borderColor='var(--borde)'; this.style.background='transparent'; this.style.color='var(--negro)'">Conoce Forward34 →</a>
+      <div class="forward34-note reveal">
+        <span style="font-size:2rem;">⚡</span>
+        <p><strong>Nacimos de conversaciones que exigieron EJECUCIÓN.</strong> Forward34 es la capa de implementación para organizaciones que decidieron avanzar después de los espacios activados desde Descúbrete+. La conversación abre la puerta. La ejecución es lo que cambia todo.</p>
       </div>
     </div>
   </section>
@@ -435,7 +358,7 @@
       </div>
       <p class="audiencias-desc reveal">Experiencias, talleres y rutas aplicadas para ayudar a personas y organizaciones a incorporar tecnología con claridad, propósito y una adopción real.</p>
       <div style="text-align:center;" class="reveal">
-       <a href="https://youtube.com/@descubretemx" target="_blank" class="btn-dark">Accede a contenido gratuito</a>
+        <a href="contacto.html" class="btn-dark">Accede a contenido gratuito</a>
       </div>
     </div>
   </section>
