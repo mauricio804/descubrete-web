@@ -1,0 +1,10 @@
+{
+  "redirects": [
+    { "source": "/copia-de-contáctanos", "destination": "/contacto.html", "permanent": true },
+    { "source": "/event-details/(.*)", "destination": "/programas.html", "permanent": true },
+    { "source": "/en/event-details/(.*)", "destination": "/programas.html", "permanent": true },
+    { "source": "/schedule/(.*)", "destination": "/programas.html", "permanent": true },
+    { "source": "/descubretesummit24", "destination": "/programas.html", "permanent": true },
+    { "source": "/faqs", "destination": "/index.html", "permanent": true }
+  ]
+}
