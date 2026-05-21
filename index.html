@@ -59,7 +59,7 @@
 .hero-bg::after {
   content: '';
   position: absolute; inset: 0;
-  background: linear-gradient(to bottom, rgba(10,10,10,0.72) 0%, rgba(10,10,10,0.60) 100%);
+  background: linear-gradient(to bottom, rgba(250,250,250,0.85) 0%, rgba(250,250,250,0.75) 100%);
 }
     /* SERVICE IMAGES */
     .service-img {
@@ -71,31 +71,29 @@
     }
     .hero-badge {
       display: inline-flex; align-items: center; gap: 0.5rem;
-      background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2);
+      background: var(--fondo-2); border: 1px solid var(--borde);
       padding: 0.35rem 0.9rem; border-radius: 100px;
-      font-size: 0.72rem; font-weight: 500; color: rgba(255,255,255,0.85);
+      font-size: 0.72rem; font-weight: 500; color: var(--gris-1);
       margin-bottom: 2.5rem; opacity: 0; animation: fade-up 0.6s ease 0.1s forwards;
     }
     .badge-dot { width: 6px; height: 6px; background: var(--naranja); border-radius: 50%; animation: pulse 2s ease infinite; }
     @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.4; } }
-    @keyframes pulse-bolt { 0%,100% { transform: scale(1); } 50% { transform: scale(1.2) rotate(5deg); } }
-    @keyframes float-logo { 0%,100% { transform: translateY(0) scale(1); } 40% { transform: translateY(-4px) scale(1.04); } 70% { transform: translateY(2px) scale(0.98); } }
     .hero-title {
       font-family: 'DM Serif Display', serif;
-      font-size: clamp(2.6rem, 5vw, 4.2rem); font-weight: 400;
-      line-height: 1.1; letter-spacing: -0.03em; color: var(--blanco);
+      font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 400;
+      line-height: 1.1; letter-spacing: -0.03em; color: var(--negro);
       max-width: 820px; margin-bottom: 1.8rem;
       opacity: 0; animation: fade-up 0.6s ease 0.2s forwards;
     }
     .hero-title em { font-style: italic; color: var(--naranja); }
     .hero-subtitle {
-      font-size: 1rem; color: rgba(255,255,255,0.75); max-width: 560px;
+      font-size: 1rem; color: var(--gris-1); max-width: 560px;
       line-height: 1.7; margin-bottom: 1rem;
       opacity: 0; animation: fade-up 0.6s ease 0.3s forwards; letter-spacing: -0.01em;
     }
     .hero-subtitle-2 {
-      font-size: 0.92rem; color: rgba(255,255,255,0.85); max-width: 520px;
-      line-height: 1.7; margin-bottom: 2.5rem; font-style: italic; font-weight: 500;
+      font-size: 0.88rem; color: var(--gris-2); max-width: 520px;
+      line-height: 1.7; margin-bottom: 2.5rem; font-style: italic;
       opacity: 0; animation: fade-up 0.6s ease 0.35s forwards; letter-spacing: -0.01em;
     }
     .hero-buttons { display: flex; gap: 0.8rem; flex-wrap: wrap; justify-content: center; opacity: 0; animation: fade-up 0.6s ease 0.4s forwards; margin-bottom: 5rem; }
@@ -106,9 +104,9 @@
     .hero-pillars {
       opacity: 0; animation: fade-up 0.6s ease 0.5s forwards;
       display: flex; gap: 3rem; justify-content: center; flex-wrap: wrap;
-      padding-top: 3rem; border-top: 1px solid rgba(255,255,255,0.15); width: 100%; max-width: 600px;
+      padding-top: 3rem; border-top: 1px solid var(--borde); width: 100%; max-width: 600px;
     }
-    .hero-pillars span { font-family: 'DM Serif Display', serif; font-size: 0.95rem; color: rgba(255,255,255,0.7); font-style: italic; }
+    .hero-pillars span { font-family: 'DM Serif Display', serif; font-size: 0.95rem; color: var(--gris-2); font-style: italic; }
     @keyframes fade-up { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
 
     /* SECTIONS */
@@ -216,44 +214,12 @@
       .hero-pillars { gap: 1.5rem; }
     }
   </style>
-  <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Descúbrete+",
-  "url": "https://descubrete.mx",
-  "logo": "https://descubrete.mx/images/logo.png",
-  "email": "contacto@descubrete.mx",
-  "sameAs": [
-    "https://instagram.com/descubrete_mx",
-    "https://tiktok.com/@descubrete_mx",
-    "https://www.linkedin.com/company/descubretemx/",
-    "https://x.com/descubretemx",
-    "https://www.facebook.com/descubretemx",
-    "https://youtube.com/@descubretemx"
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Event",
-  "name": "AGENTIC 2026",
-  "description": "Cumbre de inteligencia artificial y liderazgo ejecutivo en México y San Francisco. El evento de IA más importante de LATAM.",
-  "organizer": {
-    "@type": "Organization",
-    "name": "Descúbrete+",
-    "url": "https://descubrete.mx"
-  },
-  "location": {
-    "@type": "Place",
-    "name": "Ciudad de México"
-  },
-  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-  "eventStatus": "https://schema.org/EventScheduled",
-  "url": "https://descubrete.mx/agentic.html"
-}
-</script>
+  <link rel="canonical" href="https://www.descubrete.mx/">
+<meta property="og:image" content="https://www.descubrete.mx/images/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.descubrete.mx/images/og-image.jpg">
 </head>
 <body>
 
@@ -304,28 +270,28 @@
     </div>
     <div class="services-grid">
       <div class="service-card reveal d1">
-        <img src="images/summit.jpg" alt="Descúbrete Summit" class="service-img">
+        <img src="<img src="images/summit.jpg" alt="Descúbrete Summit - Evento de liderazgo e inteligencia artificial en México" class="service-img"> alt="Descúbrete Summit" class="service-img">
         <span class="service-num">01</span>
         <h3>Descúbrete Summit</h3>
         <p>El evento de mayor impacto para líderes que buscan claridad, criterio y conexión. Speakers internacionales y comunidad de alto nivel.</p>
         <a href="programas.html" class="service-link">Conocer más →</a>
       </div>
       <div class="service-card reveal d2">
-        <img src="images/talks.jpg" alt="Descúbrete Talks" class="service-img">
+        <img src="<img src="images/talks.jpg" alt="Descúbrete Talks - Conversaciones con referentes internacionales de liderazgo y tecnología" class="service-img"> alt="Descúbrete Talks" class="service-img">
         <span class="service-num">02</span>
         <h3>Descúbrete Talks</h3>
         <p>Conversaciones íntimas con referentes de clase mundial. Criterio, liderazgo y visión para adelantarte a tu competencia.</p>
         <a href="programas.html" class="service-link">Conocer más →</a>
       </div>
       <div class="service-card reveal d3">
-        <img src="images/corporate.jpg" alt="Corporate Training" class="service-img">
+        <img src="<img src="images/corporate.jpg" alt="Corporate Training Descúbrete+ - Entrenamiento ejecutivo para empresas en México" class="service-img"> alt="Corporate Training" class="service-img">
         <span class="service-num">03</span>
         <h3>Corporate Training</h3>
         <p>Entrenamiento ejecutivo para desarrollar habilidades y capacidades específicas aplicables a negocios. Para equipos que quieren resultados.</p>
         <a href="programas.html" class="service-link">Conocer más →</a>
       </div>
       <div class="service-card reveal d1">
-        <img src="images/podcast.png" alt="Podcast" class="service-img">
+        <img src="<img src="images/podcast.png" alt="Podcast Descúbrete+ - Episodios de liderazgo, tecnología e inteligencia artificial" class="service-img"> alt="Podcast" class="service-img">
         <span class="service-num">04</span>
         <h3>Podcast</h3>
         
@@ -333,14 +299,14 @@
         <a href="programas.html" class="service-link">Escuchar →</a>
       </div>
       <div class="service-card reveal d2">
-        <img src="images/fireside.jpg" alt="Fireside Chats" class="service-img">
+        <img src="<img src="images/fireside.jpg" alt="Fireside Chats Descúbrete+ - Conversaciones íntimas con referentes internacionales" class="service-img"> alt="Fireside Chats" class="service-img">
         <span class="service-num">05</span>
         <h3>Fireside Chats</h3>
         <p>Conversaciones íntimas con referentes internacionales. Acceso a perspectivas que no encuentras en ningún otro foro de la región.</p>
         <a href="programas.html" class="service-link">Conocer más →</a>
       </div>
       <div class="service-card reveal d3">
-        <img src="images/comunidad.jpg" alt="Comunidad" class="service-img">
+        <img src="<img src="images/comunidad.jpg" alt="Comunidad Descúbrete+ - Red de líderes y profesionales en México y LATAM" class="service-img"> alt="Comunidad" class="service-img">
         <span class="service-num">06</span>
         <h3>Comunidad</h3>
         <p>Conectamos talento, empresas e innovación para acelerar crecimiento y colaboración. Una red de personas que decidieron avanzar.</p>
@@ -368,13 +334,9 @@
         <div class="format-item reveal d4"><span class="format-icon">🤖</span><h3>Tecnología SaaS</h3><p>Productos avanzados con automatizaciones inteligentes y soluciones flexibles.</p></div>
         <div class="format-item reveal d5"><span class="format-icon">🌐</span><h3>Comunidad Global</h3><p>Talento, empresas e innovación conectados para acelerar el avance.</p></div>
       </div>
-      <div class="forward34-note reveal" style="display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap;">
-        <span style="font-size:2rem; flex-shrink:0; line-height:1; animation: pulse-bolt 2s ease infinite;">⚡</span>
-        <a href="https://www.forward34.com/index.html" target="_blank" style="display:inline-flex; align-items:center; flex-shrink:0;">
-          <img src="images/logo_f34.png" alt="Forward34" style="height:72px; width:auto; filter:brightness(0); animation: float-logo 3s ease-in-out infinite; transition:filter 0.3s ease;" onmouseover="this.style.filter='brightness(0.2) sepia(1) saturate(5) hue-rotate(340deg)'" onmouseout="this.style.filter='brightness(0)'">
-        </a>
-        <p style="font-size:0.85rem; color:var(--gris-1); line-height:1.7; letter-spacing:-0.01em; flex:1; min-width:200px;"><strong style="color:var(--negro);">Nacimos de conversaciones que exigieron EJECUCIÓN.</strong> Forward34 es la capa de implementación para organizaciones que decidieron avanzar después de los espacios activados desde Descúbrete+. La conversación abre la puerta. La ejecución es lo que cambia todo.</p>
-        <a href="https://www.forward34.com/index.html" target="_blank" style="display:inline-flex; align-items:center; gap:0.4rem; font-size:0.78rem; font-weight:500; color:var(--negro); text-decoration:none; border:1px solid var(--borde); padding:0.45rem 1rem; border-radius:6px; transition:all 0.15s; flex-shrink:0; white-space:nowrap;" onmouseover="this.style.borderColor='var(--negro)'; this.style.background='var(--negro)'; this.style.color='white'" onmouseout="this.style.borderColor='var(--borde)'; this.style.background='transparent'; this.style.color='var(--negro)'">Conoce Forward34 →</a>
+      <div class="forward34-note reveal">
+        <span style="font-size:2rem;">⚡</span>
+        <p><strong>Nacimos de conversaciones que exigieron EJECUCIÓN.</strong> Forward34 es la capa de implementación para organizaciones que decidieron avanzar después de los espacios activados desde Descúbrete+. La conversación abre la puerta. La ejecución es lo que cambia todo.</p>
       </div>
     </div>
   </section>
