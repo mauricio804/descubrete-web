@@ -52,9 +52,29 @@
     }
     .hero-bg {
   position: absolute; inset: 0;
-  opacity: 1;
   pointer-events: none;
-  animation: heroCycle 27s infinite;
+}
+.hero-slide {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+  opacity: 0;
+  animation: fadeSlide 27s infinite;
+}
+.hero-slide:nth-child(1) { background-image: url('images/hero.jpg'); animation-delay: 0s; }
+.hero-slide:nth-child(2) { background-image: url('images/hero1.jpg'); animation-delay: 3s; }
+.hero-slide:nth-child(3) { background-image: url('images/hero2.jpg'); animation-delay: 6s; }
+.hero-slide:nth-child(4) { background-image: url('images/hero3.jpg'); animation-delay: 9s; }
+.hero-slide:nth-child(5) { background-image: url('images/hero4.jpg'); animation-delay: 12s; }
+.hero-slide:nth-child(6) { background-image: url('images/hero5.jpg'); animation-delay: 15s; }
+.hero-slide:nth-child(7) { background-image: url('images/hero6.jpg'); animation-delay: 18s; }
+.hero-slide:nth-child(8) { background-image: url('images/hero7.jpg'); animation-delay: 21s; }
+.hero-slide:nth-child(9) { background-image: url('images/hero8.jpg'); animation-delay: 24s; }
+@keyframes fadeSlide {
+  0%   { opacity: 0; }
+  8%   { opacity: 1; }
+  25%  { opacity: 1; }
+  33%  { opacity: 0; }
+  100% { opacity: 0; }
 }
 @keyframes heroCycle {
   0%    { background-image: url('images/hero.jpg'); background-size: cover; background-position: center; }
@@ -255,7 +275,17 @@
 
   <!-- HERO -->
   <section id="hero">
-    <div class="hero-bg"></div>
+    <div class="hero-bg">
+  <div class="hero-slide"></div>
+  <div class="hero-slide"></div>
+  <div class="hero-slide"></div>
+  <div class="hero-slide"></div>
+  <div class="hero-slide"></div>
+  <div class="hero-slide"></div>
+  <div class="hero-slide"></div>
+  <div class="hero-slide"></div>
+  <div class="hero-slide"></div>
+</div>
     <div class="hero-badge"><span class="badge-dot"></span>Inspírate · Aprende · Evoluciona</div>
     <h1 class="hero-title">
       Experiencias y herramientas<br>para crecer con <em>claridad,<br>criterio y conexión</em>
