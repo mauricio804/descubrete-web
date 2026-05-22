@@ -308,6 +308,170 @@
     }, { threshold: 0.08 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   </script>
+<!-- NÉPSIS WIDGET -->
+<style>
+  #nepsis-bubble{position:fixed;bottom:28px;right:28px;width:58px;height:58px;background:#222744;border-radius:50%;cursor:pointer;z-index:9999;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 40px rgba(0,0,0,0.18);transition:transform 0.2s ease;border:2px solid #F0730C}
+  #nepsis-bubble:hover{transform:scale(1.08)}
+  #nepsis-badge{position:absolute;top:-4px;right:-4px;width:14px;height:14px;background:#F0730C;border-radius:50%;border:2px solid white;animation:pulse-badge 2s infinite}
+  @keyframes pulse-badge{0%,100%{transform:scale(1)}50%{transform:scale(1.3);opacity:0.7}}
+  #nepsis-window{position:fixed;bottom:100px;right:28px;width:360px;max-height:540px;background:white;border-radius:18px;box-shadow:0 8px 40px rgba(0,0,0,0.18);z-index:9998;display:none;flex-direction:column;overflow:hidden;font-family:'Inter',sans-serif}
+  #nepsis-window.open{display:flex;animation:slideUp 0.3s ease}
+  @keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+  #nepsis-header{background:#222744;padding:16px 18px;display:flex;align-items:center;gap:12px}
+  #nepsis-avatar{width:38px;height:38px;border-radius:50%;background:#F0730C;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+  #nepsis-header-name{color:white;font-size:0.9rem;font-weight:600}
+  #nepsis-header-status{color:rgba(255,255,255,0.6);font-size:0.72rem;margin-top:1px}
+  #nepsis-close{color:rgba(255,255,255,0.5);cursor:pointer;font-size:1.2rem;margin-left:auto;padding:4px}
+  #nepsis-close:hover{color:white}
+  #nepsis-messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;scroll-behavior:smooth}
+  .n-msg{max-width:85%;padding:10px 14px;border-radius:14px;font-size:0.84rem;line-height:1.55;animation:fadeMsg 0.2s ease}
+  @keyframes fadeMsg{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+  .n-msg.nepsis{background:#F5F5F5;color:#1a1a1a;border-bottom-left-radius:4px;align-self:flex-start}
+  .n-msg.user{background:#222744;color:white;border-bottom-right-radius:4px;align-self:flex-end}
+  .n-typing{background:#F5F5F5;padding:12px 16px;border-radius:14px;border-bottom-left-radius:4px;align-self:flex-start;display:flex;gap:4px;align-items:center}
+  .n-dot{width:6px;height:6px;background:#aaa;border-radius:50%;animation:bounce 1.2s infinite}
+  .n-dot:nth-child(2){animation-delay:0.2s}.n-dot:nth-child(3){animation-delay:0.4s}
+  @keyframes bounce{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-6px)}}
+  #nepsis-suggestions{padding:0 16px 10px;display:flex;flex-wrap:wrap;gap:6px}
+  .n-chip{background:white;border:1px solid #e0e0e0;border-radius:20px;padding:5px 12px;font-size:0.75rem;cursor:pointer;color:#222744;transition:all 0.15s}
+  .n-chip:hover{background:#222744;color:white;border-color:#222744}
+  #nepsis-input-area{padding:12px 14px;border-top:1px solid #f0f0f0;display:flex;gap:8px;align-items:flex-end}
+  #nepsis-input{flex:1;border:1px solid #e8e8e8;border-radius:10px;padding:9px 12px;font-size:0.83rem;font-family:inherit;resize:none;outline:none;max-height:80px;line-height:1.4;color:#1a1a1a;transition:border 0.15s}
+  #nepsis-input:focus{border-color:#F0730C}
+  #nepsis-send{width:36px;height:36px;background:#F0730C;border:none;border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:opacity 0.15s}
+  #nepsis-send:hover{opacity:0.85}
+  #nepsis-capture{padding:16px;display:none;flex-direction:column;gap:10px;border-top:1px solid #f0f0f0}
+  #nepsis-capture.show{display:flex}
+  #nepsis-capture p{font-size:0.8rem;color:#666;margin:0;line-height:1.4}
+  .n-field{border:1px solid #e8e8e8;border-radius:8px;padding:8px 12px;font-size:0.82rem;font-family:inherit;outline:none;transition:border 0.15s;width:100%;box-sizing:border-box}
+  .n-field:focus{border-color:#F0730C}
+  #nepsis-capture-btn{background:#F0730C;color:white;border:none;border-radius:8px;padding:9px;font-size:0.82rem;font-weight:600;cursor:pointer;font-family:inherit}
+  #nepsis-capture-btn:hover{opacity:0.85}
+  @media(max-width:420px){#nepsis-window{width:calc(100vw - 32px);right:16px;bottom:90px}#nepsis-bubble{right:16px;bottom:20px}}
+</style>
 
+<div id="nepsis-bubble" onclick="nepsisToggle()">
+  <div id="nepsis-badge"></div>
+  <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="26" height="26"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+</div>
+
+<div id="nepsis-window">
+  <div id="nepsis-header">
+    <div id="nepsis-avatar">✦</div>
+    <div>
+      <div id="nepsis-header-name">Népsis</div>
+      <div id="nepsis-header-status">Guía de Descúbrete+</div>
+    </div>
+    <div id="nepsis-close" onclick="nepsisToggle()">✕</div>
+  </div>
+  <div id="nepsis-messages"></div>
+  <div id="nepsis-suggestions">
+    <span class="n-chip" onclick="nepsisAsk('¿Qué es Descúbrete+?')">¿Qué es Descúbrete+?</span>
+    <span class="n-chip" onclick="nepsisAsk('¿Qué es AGENTIC 2026?')">AGENTIC 2026</span>
+    <span class="n-chip" onclick="nepsisAsk('¿Qué programas tienen?')">Programas</span>
+    <span class="n-chip" onclick="nepsisAsk('¿Cómo contactarlos?')">Contacto</span>
+  </div>
+  <div id="nepsis-capture">
+    <p>¿Quieres que alguien del equipo te contacte?</p>
+    <input class="n-field" id="n-nombre" placeholder="Tu nombre" type="text">
+    <input class="n-field" id="n-email" placeholder="Tu email" type="email">
+    <button id="nepsis-capture-btn" onclick="nepsisCapture()">Quiero que me contacten →</button>
+  </div>
+  <div id="nepsis-input-area">
+    <textarea id="nepsis-input" rows="1" placeholder="Escribe tu pregunta..." onkeydown="nepsisKey(event)" oninput="nepsisResize(this)"></textarea>
+    <button id="nepsis-send" onclick="nepsisSubmit()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+    </button>
+  </div>
+</div>
+
+<script>
+const NEPSIS_SYSTEM=`Eres Népsis, el agente digital de Descúbrete+. Guías a visitantes con respuestas claras y preguntas poderosas.
+
+DESCÚBRETE+: Ecosistema de liderazgo, IA y desarrollo profesional en México y LATAM. Fundada por Héctor, Florencia Morales y Pablo Cáceres. Pilares: claridad, criterio y conexión.
+
+PROGRAMAS: Summit (evento anual de liderazgo e IA), Talks (conversaciones con referentes), Corporate Training (entrenamiento ejecutivo para empresas), Fireside Chats (conversaciones íntimas con referentes), Podcast (liderazgo y tecnología), Comunidad (red de líderes en LATAM).
+
+AGENTIC 2026: Cumbre de IA más importante de LATAM. Sedes: Ciudad de México y San Francisco. Tiers: General, VIP, Masterclass Elite, Platinum.
+
+FORWARD34: Capa de implementación de Descúbrete+. Para organizaciones que pasan de la conversación a la ejecución.
+
+CONTACTO: descubrete.mx/contacto.html
+
+ESTILO: Respuestas máximo 3 oraciones. Tono cálido, ejecutivo, directo. Responde siempre en español.`;
+
+let nepsisHistory=[],nepsisOpen=false,nepsisCapturing=false,nepsisCount=0;
+
+function nepsisToggle(){
+  nepsisOpen=!nepsisOpen;
+  document.getElementById('nepsis-window').classList.toggle('open',nepsisOpen);
+  if(nepsisOpen){
+    document.getElementById('nepsis-badge').style.display='none';
+    if(nepsisHistory.length===0)setTimeout(()=>nepsisAddMsg('nepsis','¡Hola! Soy Népsis. ¿Qué te trajo hoy a Descúbrete+?'),300);
+  }
+}
+
+function nepsisAddMsg(role,text){
+  const c=document.getElementById('nepsis-messages');
+  const d=document.createElement('div');
+  d.className=`n-msg ${role}`;
+  d.textContent=text;
+  c.appendChild(d);
+  c.scrollTop=c.scrollHeight;
+}
+
+function nepsisTyping(){
+  const c=document.getElementById('nepsis-messages');
+  const d=document.createElement('div');
+  d.className='n-typing';d.id='n-typing';
+  d.innerHTML='<div class="n-dot"></div><div class="n-dot"></div><div class="n-dot"></div>';
+  c.appendChild(d);c.scrollTop=c.scrollHeight;
+}
+
+async function nepsisAsk(text){
+  document.getElementById('nepsis-suggestions').style.display='none';
+  nepsisAddMsg('user',text);
+  nepsisHistory.push({role:'user',content:text});
+  nepsisCount++;
+  nepsisTyping();
+  try{
+    const r=await fetch('/api/nepsis',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({messages:nepsisHistory,system:NEPSIS_SYSTEM})
+    });
+    const data=await r.json();
+    const reply=data.content?.[0]?.text||'Hubo un problema. Intenta de nuevo.';
+    document.getElementById('n-typing')?.remove();
+    nepsisAddMsg('nepsis',reply);
+    nepsisHistory.push({role:'assistant',content:reply});
+    if(nepsisCount>=3&&!nepsisCapturing){
+      nepsisCapturing=true;
+      setTimeout(()=>document.getElementById('nepsis-capture').classList.add('show'),800);
+    }
+  }catch(e){
+    document.getElementById('n-typing')?.remove();
+    nepsisAddMsg('nepsis','Hubo un problema de conexión. Intenta de nuevo.');
+  }
+}
+
+function nepsisSubmit(){
+  const i=document.getElementById('nepsis-input');
+  const t=i.value.trim();
+  if(!t)return;
+  i.value='';nepsisResize(i);nepsisAsk(t);
+}
+
+function nepsisKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();nepsisSubmit();}}
+function nepsisResize(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,80)+'px';}
+
+function nepsisCapture(){
+  const nombre=document.getElementById('n-nombre').value.trim();
+  const email=document.getElementById('n-email').value.trim();
+  if(!nombre||!email){alert('Por favor completa tu nombre y email.');return;}
+  document.getElementById('nepsis-capture').innerHTML=`<p style="color:#2a7a2a;font-weight:600;">✓ ¡Listo, ${nombre}! El equipo te contactará pronto.</p>`;
+  nepsisAddMsg('nepsis',`Perfecto, ${nombre}. El equipo estará en contacto contigo en breve.`);
+}
+</script>
 </body>
 </html>
