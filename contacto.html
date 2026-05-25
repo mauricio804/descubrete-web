@@ -309,6 +309,7 @@
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   </script>
 
+
 <!-- NÉPSIS WIDGET -->
   <style>
     :root { --n-naranja:#F26522; --n-azul:#1B3A6B; --n-sombra:0 8px 40px rgba(0,0,0,0.18); }
@@ -419,7 +420,9 @@ Programas:
 
 AGENTIC: evento especializado en inteligencia artificial agéntica. Para líderes que ya toman decisiones con IA. Speakers de Harvard, MIT y Stanford.
 
-Contacto: contacto@descubrete.mx | Instagram: @descubrete_mx`;
+Contacto: contacto@descubrete.mx | Instagram: @descubrete_mx
+
+Cuando el visitante exprese interés genuino en un programa o en contactar al equipo, al final de tu respuesta incluye exactamente este texto (sin comillas): [SHOW_CAPTURE]. Esto mostrará discretamente un formulario opcional. Solo úsalo una vez y solo cuando el interés sea claro y natural. Nunca lo uses en el primer mensaje ni en respuestas genéricas.`;
 
     let kairosHistory = [];
     let kairosMessageCount = 0;
@@ -473,17 +476,24 @@ Contacto: contacto@descubrete.mx | Instagram: @descubrete_mx`;
           body: JSON.stringify({ messages: kairosHistory, system: KAIROS_SYSTEM })
         });
         const data = await res.json();
-        const reply = data.content?.[0]?.text || 'Hubo un problema. Intenta de nuevo.';
+        let reply = data.content?.[0]?.text || 'Hubo un problema. Intenta de nuevo.';
         kairosRemoveTyping();
+        if (reply.includes('[SHOW_CAPTURE]')) {
+          reply = reply.replace('[SHOW_CAPTURE]', '').trim();
+          showKairosCapture();
+        }
         kairosAddMsg('kairos', reply);
         kairosHistory.push({ role: 'assistant', content: reply });
-        if (kairosMessageCount >= 3 && !kairosCapturing) {
-          kairosCapturing = true;
-          setTimeout(() => document.getElementById('kairos-capture').classList.add('show'), 800);
-        }
       } catch(e) {
         kairosRemoveTyping();
         kairosAddMsg('kairos', 'Hubo un problema de conexión. Intenta de nuevo.');
+      }
+    }
+
+    function showKairosCapture() {
+      if (!kairosCapturing) {
+        kairosCapturing = true;
+        setTimeout(() => document.getElementById('kairos-capture').classList.add('show'), 400);
       }
     }
 
@@ -497,13 +507,19 @@ Contacto: contacto@descubrete.mx | Instagram: @descubrete_mx`;
     function kairosKey(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); kairosSubmit(); } }
     function kairosResize(el) { el.style.height = 'auto'; el.style.height = Math.min(el.scrollHeight, 80) + 'px'; }
 
-    function kairosCapture() {
+    async function kairosCapture() {
       const nombre = document.getElementById('n-nombre').value.trim();
       const email = document.getElementById('n-email').value.trim();
       if (!nombre || !email) { alert('Por favor completa tu nombre y email.'); return; }
-      document.getElementById('kairos-capture').innerHTML = '<p style="color:#2a7a2a;font-weight:600;">✓ ¡Listo, ' + nombre + '! El equipo te contactará pronto.</p>';
+      try {
+        await fetch('https://formspree.io/f/mdajwege', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({ name: nombre, email: email, _subject: 'Lead Kairos — ' + nombre, message: 'Lead capturado por Kairos en ' + window.location.pathname })
+        });
+      } catch(e) { /* falla silenciosa */ }
+      document.getElementById('kairos-capture').innerHTML = '<p style="color:#2a7a2a;font-weight:600;">Perfecto, ' + nombre + '. El equipo estará en contacto con usted en breve.</p>';
       kairosAddMsg('kairos', 'Gracias, ' + nombre + '. El equipo se pondrá en contacto con usted en breve.');
-      console.log('Lead capturado:', { nombre, email });
     }
   </script>
 
