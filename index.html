@@ -259,7 +259,8 @@
       .footer-top { flex-direction: column; text-align: center; }
       .footer-bottom { flex-direction: column; text-align: center; }
       .hero-pillars { gap: 1.5rem; }
-      .forward34-note { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .forward34-note { flex-direction: column; align-items: flex-start; gap: 1.2rem; }
+      .forward34-note img { height: 52px !important; }
       .forward34-note img { height: 48px !important; }
       .nav-mobile-menu { display: flex; flex-direction: column; position: fixed; top: 64px; left: 0; right: 0; background: rgba(250,250,250,0.98); backdrop-filter: blur(20px); border-bottom: 1px solid var(--borde); padding: 1.5rem 1.5rem; gap: 1.2rem; z-index: 99; transform: translateY(-110%); transition: transform 0.3s ease; }
       .nav-mobile-menu.open { transform: translateY(0); }
@@ -408,8 +409,10 @@
         <div class="format-item reveal d5"><span class="format-icon">🌐</span><h3>Comunidad Global</h3><p>Talento, empresas e innovación conectados para acelerar el avance.</p></div>
       </div>
       <div class="forward34-note reveal">
-        <span style="font-size:2rem;">⚡</span>
-        <a href="https://www.forward34.com/index.html" target="_blank"><img src="images/logo_f34.png" alt="Forward34" style="height:72px; width:auto; filter:brightness(0); animation: float-logo 3s ease-in-out infinite; transition:filter 0.3s ease;" onmouseover="this.style.filter='brightness(0.2) sepia(1) saturate(5) hue-rotate(340deg)'" onmouseout="this.style.filter='brightness(0)'"></a>
+        <div style="display:flex; align-items:center; gap:1rem; flex-shrink:0;">
+          <span style="font-size:2rem;">⚡</span>
+          <a href="https://www.forward34.com/index.html" target="_blank"><img src="images/logo_f34.png" alt="Forward34" style="height:72px; width:auto; filter:brightness(0); animation: float-logo 3s ease-in-out infinite; transition:filter 0.3s ease;" onmouseover="this.style.filter='brightness(0.2) sepia(1) saturate(5) hue-rotate(340deg)'" onmouseout="this.style.filter='brightness(0)'"></a>
+        </div>
         <p><strong>Nacimos de conversaciones que exigieron EJECUCIÓN.</strong> Forward34 es la capa de implementación para organizaciones que decidieron avanzar después de los espacios activados desde Descúbrete+. La conversación abre la puerta. La ejecución es lo que cambia todo.</p>
         <a href="https://www.forward34.com/index.html" target="_blank" class="btn-dark" style="white-space:nowrap; text-decoration:none;">Conoce Forward34 →</a>
       </div>
