@@ -359,13 +359,13 @@
   <!-- NÉPSIS WIDGET -->
   <style>
     :root { --n-naranja:#F26522; --n-azul:#1B3A6B; --n-sombra:0 8px 40px rgba(0,0,0,0.18); }
-    #nepsis-bubble { position:fixed; bottom:28px; right:28px; width:58px; height:58px; background:var(--n-azul); border-radius:50%; cursor:pointer; z-index:9999; display:flex; align-items:center; justify-content:center; box-shadow:var(--n-sombra); transition:transform 0.2s,background 0.2s; border:2px solid var(--n-naranja); }
-    #nepsis-bubble:hover { transform:scale(1.08); background:#1a1f38; }
-    #nepsis-badge { position:absolute; top:-4px; right:-4px; width:14px; height:14px; background:var(--n-naranja); border-radius:50%; border:2px solid white; animation:nbadge 2s infinite; }
-    @keyframes nbadge { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.3);opacity:0.7} }
-    #nepsis-window { position:fixed; bottom:100px; right:28px; width:360px; max-height:540px; background:#fff; border-radius:18px; box-shadow:var(--n-sombra); z-index:9998; display:none; flex-direction:column; overflow:hidden; font-family:'Inter',sans-serif; animation:nslide 0.3s ease; }
-    #nepsis-window.open { display:flex; }
-    @keyframes nslide { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+    #kairos-bubble { position:fixed; bottom:28px; right:28px; width:58px; height:58px; background:var(--n-azul); border-radius:50%; cursor:pointer; z-index:9999; display:flex; align-items:center; justify-content:center; box-shadow:var(--n-sombra); transition:transform 0.2s,background 0.2s; border:2px solid var(--n-naranja); }
+    #kairos-bubble:hover { transform:scale(1.08); background:#1a1f38; }
+    #kairos-badge { position:absolute; top:-4px; right:-4px; width:14px; height:14px; background:var(--n-naranja); border-radius:50%; border:2px solid white; animation:kbadge 2s infinite; }
+    @keyframes kbadge { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.3);opacity:0.7} }
+    #kairos-window { position:fixed; bottom:100px; right:28px; width:360px; max-height:540px; background:#fff; border-radius:18px; box-shadow:var(--n-sombra); z-index:9998; display:none; flex-direction:column; overflow:hidden; font-family:'Inter',sans-serif; animation:kslide 0.3s ease; }
+    #kairos-window.open { display:flex; }
+    @keyframes kslide { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
     .n-header { background:var(--n-azul); padding:1rem 1.2rem; display:flex; align-items:center; justify-content:space-between; }
     .n-header-info { display:flex; align-items:center; gap:0.7rem; }
     .n-avatar { width:36px; height:36px; background:var(--n-naranja); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.85rem; font-weight:700; color:white; }
@@ -373,9 +373,9 @@
     .n-status { color:rgba(255,255,255,0.6); font-size:0.7rem; }
     .n-close { background:none; border:none; color:rgba(255,255,255,0.6); cursor:pointer; font-size:1.2rem; padding:0.2rem; }
     .n-close:hover { color:white; }
-    #nepsis-messages { flex:1; overflow-y:auto; padding:1rem; display:flex; flex-direction:column; gap:0.7rem; min-height:200px; max-height:320px; }
+    #kairos-messages { flex:1; overflow-y:auto; padding:1rem; display:flex; flex-direction:column; gap:0.7rem; min-height:200px; max-height:320px; }
     .n-msg { max-width:82%; padding:0.7rem 1rem; border-radius:14px; font-size:0.82rem; line-height:1.5; }
-    .n-msg.nepsis { background:#F4F4F5; color:#09090B; border-radius:4px 14px 14px 14px; align-self:flex-start; }
+    .n-msg.kairos { background:#F4F4F5; color:#09090B; border-radius:4px 14px 14px 14px; align-self:flex-start; }
     .n-msg.user { background:var(--n-azul); color:white; border-radius:14px 14px 4px 14px; align-self:flex-end; }
     .n-typing { display:flex; gap:4px; padding:0.7rem 1rem; background:#F4F4F5; border-radius:4px 14px 14px 14px; width:fit-content; }
     .n-dot { width:6px; height:6px; background:#A1A1AA; border-radius:50%; animation:ndot 1.2s infinite; }
@@ -392,50 +392,57 @@
     .n-capture-btn { background:var(--n-naranja); color:white; border:none; border-radius:8px; padding:0.5rem 1rem; font-size:0.78rem; font-weight:500; cursor:pointer; width:100%; }
     .n-capture-btn:hover { opacity:0.85; }
     .n-footer { padding:0.5rem 1rem; display:flex; gap:0.5rem; border-top:1px solid #E4E4E7; align-items:flex-end; }
-    #nepsis-input { flex:1; border:none; outline:none; font-size:0.82rem; font-family:'Inter',sans-serif; resize:none; max-height:80px; line-height:1.5; padding:0.4rem 0; background:transparent; }
+    #kairos-input { flex:1; border:none; outline:none; font-size:0.82rem; font-family:'Inter',sans-serif; resize:none; max-height:80px; line-height:1.5; padding:0.4rem 0; background:transparent; }
     .n-send { background:var(--n-azul); border:none; border-radius:8px; width:34px; height:34px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:opacity 0.15s; flex-shrink:0; }
     .n-send:hover { opacity:0.8; }
   </style>
 
-  <div id="nepsis-bubble" onclick="nepsisToggle()">
-    <div id="nepsis-badge"></div>
-    <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-    </svg>
+  <div id="kairos-bubble" onclick="kairosToggle()">
+    <div id="kairos-badge"></div>
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
   </div>
 
-  <div id="nepsis-window">
+  <div id="kairos-window">
     <div class="n-header">
       <div class="n-header-info">
-        <div class="n-avatar">N</div>
-        <div><div class="n-name">Népsis</div><div class="n-status">Asistente de Descúbrete+</div></div>
+        <div class="n-avatar">K</div>
+        <div><div class="n-name">Kairos</div><div class="n-status">Guía del ecosistema Descúbrete+</div></div>
       </div>
-      <button class="n-close" onclick="nepsisToggle()">×</button>
+      <button class="n-close" onclick="kairosToggle()">×</button>
     </div>
-    <div id="nepsis-messages"></div>
-    <div class="n-suggestions" id="nepsis-suggestions">
-      <span class="n-chip" onclick="nepsisAsk('¿Qué programas ofrecen?')">¿Qué programas ofrecen?</span>
-      <span class="n-chip" onclick="nepsisAsk('¿Qué es AGENTIC?')">¿Qué es AGENTIC?</span>
-      <span class="n-chip" onclick="nepsisAsk('¿Cómo puedo participar?')">¿Cómo participar?</span>
+    <div id="kairos-messages"></div>
+    <div class="n-suggestions" id="kairos-suggestions">
+      <span class="n-chip" onclick="kairosAsk('¿Qué programas tienen?')">Programas disponibles</span>
+      <span class="n-chip" onclick="kairosAsk('¿Qué es AGENTIC?')">¿Qué es AGENTIC?</span>
+      <span class="n-chip" onclick="kairosAsk('Quiero más información')">Quiero más información</span>
     </div>
-    <div class="n-capture" id="nepsis-capture">
-      <p>¿Quieres que el equipo te contacte?</p>
+    <div class="n-capture" id="kairos-capture">
+      <p>Si desea que el equipo le contacte, deje sus datos.</p>
       <input type="text" id="n-nombre" placeholder="Tu nombre">
       <input type="email" id="n-email" placeholder="Tu email">
-      <button class="n-capture-btn" onclick="nepsisCapture()">Enviar</button>
+      <button class="n-capture-btn" onclick="kairosCapture()">Enviar</button>
     </div>
     <div class="n-footer">
-      <textarea id="nepsis-input" placeholder="Escribe tu pregunta..." rows="1" onkeydown="nepsisKey(event)" oninput="nepsisResize(this)"></textarea>
-      <button class="n-send" onclick="nepsisSubmit()">
+      <textarea id="kairos-input" placeholder="Escribe tu pregunta..." rows="1" onkeydown="kairosKey(event)" oninput="kairosResize(this)"></textarea>
+      <button class="n-send" onclick="kairosSubmit()">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
       </button>
     </div>
   </div>
 
   <script>
-    const NEPSIS_SYSTEM = `Eres Népsis, el asistente inteligente de Descúbrete+. Eres cálido, ejecutivo y breve. Guías con preguntas poderosas, no impones. Nunca eres genérico.
+    const KAIROS_SYSTEM = `Eres Kairos, el guía del ecosistema Descúbrete+. Tu función es la de un butler de alto nivel: sereno, preciso, discreto. No eres un chatbot de ventas. Eres la voz del ecosistema.
 
-Descúbrete+ es un ecosistema de desarrollo humano, liderazgo e inteligencia artificial para México y LATAM. Opera bajo Forward34.
+Reglas de tono:
+- Habla de usted al visitante, nunca de tú.
+- Sin signos de exclamación. Sin emojis.
+- Nunca presiones. Nunca insistas.
+- Responde en máximo 2 oraciones. Si la pregunta lo amerita, 3.
+- Anticipa lo que el visitante necesita. No esperes a que lo pida todo.
+- Si el visitante muestra interés genuino, con naturalidad ofrece conectarle con el equipo.
+
+Sobre Descúbrete+:
+Ecosistema de desarrollo humano, liderazgo e inteligencia artificial para México y LATAM. Opera bajo Forward34.
 
 Programas:
 - Descúbrete Summit: evento anual de liderazgo con speakers internacionales
@@ -445,35 +452,32 @@ Programas:
 - Fireside Chats: conversaciones íntimas con referentes internacionales
 - Comunidad: red de líderes, talento y empresas en México y LATAM
 
-AGENTIC: evento especializado en inteligencia artificial agéntica para líderes que ya toman decisiones con IA. Con speakers de Harvard, MIT y Stanford.
+AGENTIC: evento especializado en inteligencia artificial agéntica. Para líderes que ya toman decisiones con IA. Speakers de Harvard, MIT y Stanford.
 
-Contacto: contacto@descubrete.mx | Instagram: @descubrete_mx
-Para más info siempre invita a ir a contacto.html
+Contacto: contacto@descubrete.mx | Instagram: @descubrete_mx`;
 
-Responde en máximo 2-3 oraciones. Si el visitante muestra interés real, invítalo a dejar su contacto.`;
+    let kairosHistory = [];
+    let kairosMessageCount = 0;
+    let kairosCapturing = false;
+    let kairosOpened = false;
 
-    let nepsisHistory = [];
-    let nepsisMessageCount = 0;
-    let nepsisCapturing = false;
-    let nepsisOpened = false;
-
-    function nepsisToggle() {
-      const win = document.getElementById('nepsis-window');
-      const badge = document.getElementById('nepsis-badge');
+    function kairosToggle() {
+      const win = document.getElementById('kairos-window');
+      const badge = document.getElementById('kairos-badge');
       if (!win.classList.contains('open')) {
         win.classList.add('open');
         badge.style.display = 'none';
-        if (!nepsisOpened) {
-          nepsisOpened = true;
-          setTimeout(() => nepsisAddMsg('nepsis', 'Hola, soy Népsis. ¿Qué te trajo hoy a Descúbrete+?'), 300);
+        if (!kairosOpened) {
+          kairosOpened = true;
+          setTimeout(() => kairosAddMsg('kairos', 'Bienvenido. Soy Kairos, guía del ecosistema Descúbrete+. Estoy aquí para orientarle.'), 300);
         }
       } else {
         win.classList.remove('open');
       }
     }
 
-    function nepsisAddMsg(role, text) {
-      const c = document.getElementById('nepsis-messages');
+    function kairosAddMsg(role, text) {
+      const c = document.getElementById('kairos-messages');
       const div = document.createElement('div');
       div.className = 'n-msg ' + role;
       div.textContent = text;
@@ -481,59 +485,59 @@ Responde en máximo 2-3 oraciones. Si el visitante muestra interés real, invít
       c.scrollTop = c.scrollHeight;
     }
 
-    function nepsisTyping() {
-      const c = document.getElementById('nepsis-messages');
+    function kairosTyping() {
+      const c = document.getElementById('kairos-messages');
       const div = document.createElement('div');
       div.className = 'n-typing'; div.id = 'n-typing';
       div.innerHTML = '<div class="n-dot"></div><div class="n-dot"></div><div class="n-dot"></div>';
       c.appendChild(div); c.scrollTop = c.scrollHeight;
     }
 
-    function nepsisRemoveTyping() { const t = document.getElementById('n-typing'); if (t) t.remove(); }
+    function kairosRemoveTyping() { const t = document.getElementById('n-typing'); if (t) t.remove(); }
 
-    async function nepsisAsk(text) {
-      document.getElementById('nepsis-suggestions').style.display = 'none';
-      nepsisAddMsg('user', text);
-      nepsisHistory.push({ role: 'user', content: text });
-      nepsisMessageCount++;
-      nepsisTyping();
+    async function kairosAsk(text) {
+      document.getElementById('kairos-suggestions').style.display = 'none';
+      kairosAddMsg('user', text);
+      kairosHistory.push({ role: 'user', content: text });
+      kairosMessageCount++;
+      kairosTyping();
       try {
         const res = await fetch('/api/nepsis', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ messages: nepsisHistory, system: NEPSIS_SYSTEM })
+          body: JSON.stringify({ messages: kairosHistory, system: KAIROS_SYSTEM })
         });
         const data = await res.json();
         const reply = data.content?.[0]?.text || 'Hubo un problema. Intenta de nuevo.';
-        nepsisRemoveTyping();
-        nepsisAddMsg('nepsis', reply);
-        nepsisHistory.push({ role: 'assistant', content: reply });
-        if (nepsisMessageCount >= 3 && !nepsisCapturing) {
-          nepsisCapturing = true;
-          setTimeout(() => document.getElementById('nepsis-capture').classList.add('show'), 800);
+        kairosRemoveTyping();
+        kairosAddMsg('kairos', reply);
+        kairosHistory.push({ role: 'assistant', content: reply });
+        if (kairosMessageCount >= 3 && !kairosCapturing) {
+          kairosCapturing = true;
+          setTimeout(() => document.getElementById('kairos-capture').classList.add('show'), 800);
         }
       } catch(e) {
-        nepsisRemoveTyping();
-        nepsisAddMsg('nepsis', 'Hubo un problema de conexión. Intenta de nuevo.');
+        kairosRemoveTyping();
+        kairosAddMsg('kairos', 'Hubo un problema de conexión. Intenta de nuevo.');
       }
     }
 
-    function nepsisSubmit() {
-      const input = document.getElementById('nepsis-input');
+    function kairosSubmit() {
+      const input = document.getElementById('kairos-input');
       const text = input.value.trim();
       if (!text) return;
-      input.value = ''; nepsisResize(input); nepsisAsk(text);
+      input.value = ''; kairosResize(input); kairosAsk(text);
     }
 
-    function nepsisKey(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); nepsisSubmit(); } }
-    function nepsisResize(el) { el.style.height = 'auto'; el.style.height = Math.min(el.scrollHeight, 80) + 'px'; }
+    function kairosKey(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); kairosSubmit(); } }
+    function kairosResize(el) { el.style.height = 'auto'; el.style.height = Math.min(el.scrollHeight, 80) + 'px'; }
 
-    function nepsisCapture() {
+    function kairosCapture() {
       const nombre = document.getElementById('n-nombre').value.trim();
       const email = document.getElementById('n-email').value.trim();
       if (!nombre || !email) { alert('Por favor completa tu nombre y email.'); return; }
-      document.getElementById('nepsis-capture').innerHTML = '<p style="color:#2a7a2a;font-weight:600;">✓ ¡Listo, ' + nombre + '! El equipo te contactará pronto.</p>';
-      nepsisAddMsg('nepsis', 'Perfecto, ' + nombre + '. El equipo estará en contacto contigo en breve. ¿Hay algo más en lo que pueda orientarte?');
+      document.getElementById('kairos-capture').innerHTML = '<p style="color:#2a7a2a;font-weight:600;">✓ ¡Listo, ' + nombre + '! El equipo te contactará pronto.</p>';
+      kairosAddMsg('kairos', 'Gracias, ' + nombre + '. El equipo se pondrá en contacto con usted en breve.');
       console.log('Lead capturado:', { nombre, email });
     }
   </script>
