@@ -308,170 +308,204 @@
     }, { threshold: 0.08 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   </script>
+
 <!-- NÉPSIS WIDGET -->
-<style>
-  #nepsis-bubble{position:fixed;bottom:28px;right:28px;width:58px;height:58px;background:#222744;border-radius:50%;cursor:pointer;z-index:9999;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 40px rgba(0,0,0,0.18);transition:transform 0.2s ease;border:2px solid #F0730C}
-  #nepsis-bubble:hover{transform:scale(1.08)}
-  #nepsis-badge{position:absolute;top:-4px;right:-4px;width:14px;height:14px;background:#F0730C;border-radius:50%;border:2px solid white;animation:pulse-badge 2s infinite}
-  @keyframes pulse-badge{0%,100%{transform:scale(1)}50%{transform:scale(1.3);opacity:0.7}}
-  #nepsis-window{position:fixed;bottom:100px;right:28px;width:360px;max-height:540px;background:white;border-radius:18px;box-shadow:0 8px 40px rgba(0,0,0,0.18);z-index:9998;display:none;flex-direction:column;overflow:hidden;font-family:'Inter',sans-serif}
-  #nepsis-window.open{display:flex;animation:slideUp 0.3s ease}
-  @keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-  #nepsis-header{background:#222744;padding:16px 18px;display:flex;align-items:center;gap:12px}
-  #nepsis-avatar{width:38px;height:38px;border-radius:50%;background:#F0730C;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
-  #nepsis-header-name{color:white;font-size:0.9rem;font-weight:600}
-  #nepsis-header-status{color:rgba(255,255,255,0.6);font-size:0.72rem;margin-top:1px}
-  #nepsis-close{color:rgba(255,255,255,0.5);cursor:pointer;font-size:1.2rem;margin-left:auto;padding:4px}
-  #nepsis-close:hover{color:white}
-  #nepsis-messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;scroll-behavior:smooth}
-  .n-msg{max-width:85%;padding:10px 14px;border-radius:14px;font-size:0.84rem;line-height:1.55;animation:fadeMsg 0.2s ease}
-  @keyframes fadeMsg{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-  .n-msg.nepsis{background:#F5F5F5;color:#1a1a1a;border-bottom-left-radius:4px;align-self:flex-start}
-  .n-msg.user{background:#222744;color:white;border-bottom-right-radius:4px;align-self:flex-end}
-  .n-typing{background:#F5F5F5;padding:12px 16px;border-radius:14px;border-bottom-left-radius:4px;align-self:flex-start;display:flex;gap:4px;align-items:center}
-  .n-dot{width:6px;height:6px;background:#aaa;border-radius:50%;animation:bounce 1.2s infinite}
-  .n-dot:nth-child(2){animation-delay:0.2s}.n-dot:nth-child(3){animation-delay:0.4s}
-  @keyframes bounce{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-6px)}}
-  #nepsis-suggestions{padding:0 16px 10px;display:flex;flex-wrap:wrap;gap:6px}
-  .n-chip{background:white;border:1px solid #e0e0e0;border-radius:20px;padding:5px 12px;font-size:0.75rem;cursor:pointer;color:#222744;transition:all 0.15s}
-  .n-chip:hover{background:#222744;color:white;border-color:#222744}
-  #nepsis-input-area{padding:12px 14px;border-top:1px solid #f0f0f0;display:flex;gap:8px;align-items:flex-end}
-  #nepsis-input{flex:1;border:1px solid #e8e8e8;border-radius:10px;padding:9px 12px;font-size:0.83rem;font-family:inherit;resize:none;outline:none;max-height:80px;line-height:1.4;color:#1a1a1a;transition:border 0.15s}
-  #nepsis-input:focus{border-color:#F0730C}
-  #nepsis-send{width:36px;height:36px;background:#F0730C;border:none;border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:opacity 0.15s}
-  #nepsis-send:hover{opacity:0.85}
-  #nepsis-capture{padding:16px;display:none;flex-direction:column;gap:10px;border-top:1px solid #f0f0f0}
-  #nepsis-capture.show{display:flex}
-  #nepsis-capture p{font-size:0.8rem;color:#666;margin:0;line-height:1.4}
-  .n-field{border:1px solid #e8e8e8;border-radius:8px;padding:8px 12px;font-size:0.82rem;font-family:inherit;outline:none;transition:border 0.15s;width:100%;box-sizing:border-box}
-  .n-field:focus{border-color:#F0730C}
-  #nepsis-capture-btn{background:#F0730C;color:white;border:none;border-radius:8px;padding:9px;font-size:0.82rem;font-weight:600;cursor:pointer;font-family:inherit}
-  #nepsis-capture-btn:hover{opacity:0.85}
-  @media(max-width:420px){#nepsis-window{width:calc(100vw - 32px);right:16px;bottom:90px}#nepsis-bubble{right:16px;bottom:20px}}
-</style>
+  <style>
+    :root { --n-naranja:#F26522; --n-azul:#1B3A6B; --n-sombra:0 8px 40px rgba(0,0,0,0.18); }
+    #kairos-bubble { position:fixed; bottom:28px; right:28px; width:58px; height:58px; background:var(--n-azul); border-radius:50%; cursor:pointer; z-index:9999; display:flex; align-items:center; justify-content:center; box-shadow:var(--n-sombra); transition:transform 0.2s,background 0.2s; border:2px solid var(--n-naranja); }
+    #kairos-bubble:hover { transform:scale(1.08); background:#1a1f38; }
+    .k-needle { transform-origin: 16px 16px; animation: k-needle-sway 4s ease-in-out infinite; }
+    .k-dash-ring { animation: k-dash-fade 4s ease infinite; }
+    @keyframes k-needle-sway { 0%,100%{transform:rotate(-20deg)} 50%{transform:rotate(20deg)} }
+    @keyframes k-dash-fade { 0%,100%{opacity:0.2} 50%{opacity:0.6} }
+    #kairos-badge { position:absolute; top:-4px; right:-4px; width:14px; height:14px; background:var(--n-naranja); border-radius:50%; border:2px solid white; animation:kbadge 2s infinite; }
+    @keyframes kbadge { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.3);opacity:0.7} }
+    #kairos-window { position:fixed; bottom:100px; right:28px; width:360px; max-height:540px; background:#fff; border-radius:18px; box-shadow:var(--n-sombra); z-index:9998; display:none; flex-direction:column; overflow:hidden; font-family:'Inter',sans-serif; animation:kslide 0.3s ease; }
+    #kairos-window.open { display:flex; }
+    @keyframes kslide { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+    .n-header { background:var(--n-azul); padding:1rem 1.2rem; display:flex; align-items:center; justify-content:space-between; }
+    .n-header-info { display:flex; align-items:center; gap:0.7rem; }
+    .n-avatar { width:36px; height:36px; background:var(--n-naranja); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.85rem; font-weight:700; color:white; }
+    .n-name { color:white; font-weight:600; font-size:0.88rem; }
+    .n-status { color:rgba(255,255,255,0.6); font-size:0.7rem; }
+    .n-close { background:none; border:none; color:rgba(255,255,255,0.6); cursor:pointer; font-size:1.2rem; padding:0.2rem; }
+    .n-close:hover { color:white; }
+    #kairos-messages { flex:1; overflow-y:auto; padding:1rem; display:flex; flex-direction:column; gap:0.7rem; min-height:200px; max-height:320px; }
+    .n-msg { max-width:82%; padding:0.7rem 1rem; border-radius:14px; font-size:0.82rem; line-height:1.5; }
+    .n-msg.kairos { background:#F4F4F5; color:#09090B; border-radius:4px 14px 14px 14px; align-self:flex-start; }
+    .n-msg.user { background:var(--n-azul); color:white; border-radius:14px 14px 4px 14px; align-self:flex-end; }
+    .n-typing { display:flex; gap:4px; padding:0.7rem 1rem; background:#F4F4F5; border-radius:4px 14px 14px 14px; width:fit-content; }
+    .n-dot { width:6px; height:6px; background:#A1A1AA; border-radius:50%; animation:ndot 1.2s infinite; }
+    .n-dot:nth-child(2){animation-delay:0.2s} .n-dot:nth-child(3){animation-delay:0.4s}
+    @keyframes ndot { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
+    .n-suggestions { display:flex; flex-wrap:wrap; gap:0.4rem; padding:0 1rem 0.8rem; }
+    .n-chip { background:#F4F4F5; border:1px solid #E4E4E7; border-radius:100px; padding:0.35rem 0.8rem; font-size:0.72rem; color:#71717A; cursor:pointer; transition:all 0.15s; white-space:nowrap; }
+    .n-chip:hover { background:var(--n-azul); color:white; border-color:var(--n-azul); }
+    .n-capture { display:none; padding:0.8rem 1rem; background:#FFF7F3; border-top:1px solid #FFE5D5; }
+    .n-capture.show { display:block; }
+    .n-capture p { font-size:0.75rem; color:#71717A; margin-bottom:0.6rem; }
+    .n-capture input { width:100%; padding:0.5rem 0.7rem; border:1px solid #E4E4E7; border-radius:8px; font-size:0.8rem; margin-bottom:0.4rem; outline:none; }
+    .n-capture input:focus { border-color:var(--n-naranja); }
+    .n-capture-btn { background:var(--n-naranja); color:white; border:none; border-radius:8px; padding:0.5rem 1rem; font-size:0.78rem; font-weight:500; cursor:pointer; width:100%; }
+    .n-capture-btn:hover { opacity:0.85; }
+    .n-footer { padding:0.5rem 1rem; display:flex; gap:0.5rem; border-top:1px solid #E4E4E7; align-items:flex-end; }
+    #kairos-input { flex:1; border:none; outline:none; font-size:0.82rem; font-family:'Inter',sans-serif; resize:none; max-height:80px; line-height:1.5; padding:0.4rem 0; background:transparent; }
+    .n-send { background:var(--n-azul); border:none; border-radius:8px; width:34px; height:34px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:opacity 0.15s; flex-shrink:0; }
+    .n-send:hover { opacity:0.8; }
+  </style>
 
-<div id="nepsis-bubble" onclick="nepsisToggle()">
-  <div id="nepsis-badge"></div>
-  <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="26" height="26"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-</div>
+  <div id="kairos-bubble" onclick="kairosToggle()">
+    <div id="kairos-badge"></div>
+    <svg width="30" height="30" viewBox="0 0 32 32" fill="none">
+      <circle class="k-dash-ring" cx="16" cy="16" r="12" stroke="rgba(255,255,255,0.3)" stroke-width="1" stroke-dasharray="3 3"/>
+      <g class="k-needle">
+        <polygon points="16,5 17.8,16 16,13 14.2,16" fill="white" opacity="0.95"/>
+        <polygon points="16,27 17.8,16 16,19 14.2,16" fill="#F26522" opacity="0.9"/>
+      </g>
+      <circle cx="16" cy="16" r="2.5" fill="#1B3A6B" stroke="white" stroke-width="1"/>
+      <circle cx="16" cy="16" r="1" fill="#F26522"/>
+    </svg>
+  </div>
 
-<div id="nepsis-window">
-  <div id="nepsis-header">
-    <div id="nepsis-avatar">✦</div>
-    <div>
-      <div id="nepsis-header-name">Népsis</div>
-      <div id="nepsis-header-status">Guía de Descúbrete+</div>
+  <div id="kairos-window">
+    <div class="n-header">
+      <div class="n-header-info">
+        <div class="n-avatar">K</div>
+        <div><div class="n-name">Kairos</div><div class="n-status">Guía del ecosistema Descúbrete+</div></div>
+      </div>
+      <button class="n-close" onclick="kairosToggle()">×</button>
     </div>
-    <div id="nepsis-close" onclick="nepsisToggle()">✕</div>
+    <div id="kairos-messages"></div>
+    <div class="n-suggestions" id="kairos-suggestions">
+      <span class="n-chip" onclick="kairosAsk('¿Qué programas tienen?')">Programas disponibles</span>
+      <span class="n-chip" onclick="kairosAsk('¿Qué es AGENTIC?')">¿Qué es AGENTIC?</span>
+      <span class="n-chip" onclick="kairosAsk('Quiero más información')">Quiero más información</span>
+    </div>
+    <div class="n-capture" id="kairos-capture">
+      <p>Si desea que el equipo le contacte, deje sus datos.</p>
+      <input type="text" id="n-nombre" placeholder="Tu nombre">
+      <input type="email" id="n-email" placeholder="Tu email">
+      <button class="n-capture-btn" onclick="kairosCapture()">Enviar</button>
+    </div>
+    <div class="n-footer">
+      <textarea id="kairos-input" placeholder="Escribe tu pregunta..." rows="1" onkeydown="kairosKey(event)" oninput="kairosResize(this)"></textarea>
+      <button class="n-send" onclick="kairosSubmit()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+      </button>
+    </div>
   </div>
-  <div id="nepsis-messages"></div>
-  <div id="nepsis-suggestions">
-    <span class="n-chip" onclick="nepsisAsk('¿Qué es Descúbrete+?')">¿Qué es Descúbrete+?</span>
-    <span class="n-chip" onclick="nepsisAsk('¿Qué es AGENTIC 2026?')">AGENTIC 2026</span>
-    <span class="n-chip" onclick="nepsisAsk('¿Qué programas tienen?')">Programas</span>
-    <span class="n-chip" onclick="nepsisAsk('¿Cómo contactarlos?')">Contacto</span>
-  </div>
-  <div id="nepsis-capture">
-    <p>¿Quieres que alguien del equipo te contacte?</p>
-    <input class="n-field" id="n-nombre" placeholder="Tu nombre" type="text">
-    <input class="n-field" id="n-email" placeholder="Tu email" type="email">
-    <button id="nepsis-capture-btn" onclick="nepsisCapture()">Quiero que me contacten →</button>
-  </div>
-  <div id="nepsis-input-area">
-    <textarea id="nepsis-input" rows="1" placeholder="Escribe tu pregunta..." onkeydown="nepsisKey(event)" oninput="nepsisResize(this)"></textarea>
-    <button id="nepsis-send" onclick="nepsisSubmit()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-    </button>
-  </div>
-</div>
 
-<script>
-const NEPSIS_SYSTEM=`Eres Népsis, el agente digital de Descúbrete+. Guías a visitantes con respuestas claras y preguntas poderosas.
+  <script>
+    const KAIROS_SYSTEM = `Eres Kairos, el guía del ecosistema Descúbrete+. Tu función es la de un butler de alto nivel: sereno, preciso, discreto. No eres un chatbot de ventas. Eres la voz del ecosistema.
 
-DESCÚBRETE+: Ecosistema de liderazgo, IA y desarrollo profesional en México y LATAM. Fundada por Héctor, Florencia Morales y Pablo Cáceres. Pilares: claridad, criterio y conexión.
+Reglas de tono:
+- Habla de usted al visitante, nunca de tú.
+- Sin signos de exclamación. Sin emojis.
+- Nunca presiones. Nunca insistas.
+- Responde en máximo 2 oraciones. Si la pregunta lo amerita, 3.
+- Anticipa lo que el visitante necesita. No esperes a que lo pida todo.
+- Si el visitante muestra interés genuino, con naturalidad ofrece conectarle con el equipo.
 
-PROGRAMAS: Summit (evento anual de liderazgo e IA), Talks (conversaciones con referentes), Corporate Training (entrenamiento ejecutivo para empresas), Fireside Chats (conversaciones íntimas con referentes), Podcast (liderazgo y tecnología), Comunidad (red de líderes en LATAM).
+Sobre Descúbrete+:
+Ecosistema de desarrollo humano, liderazgo e inteligencia artificial para México y LATAM. Opera bajo Forward34.
 
-AGENTIC 2026: Cumbre de IA más importante de LATAM. Sedes: Ciudad de México y San Francisco. Tiers: General, VIP, Masterclass Elite, Platinum.
+Programas:
+- Descúbrete Summit: evento anual de liderazgo con speakers internacionales
+- Descúbrete Talks: conferencias con referentes de clase mundial
+- Corporate Training: entrenamiento ejecutivo para equipos y empresas
+- Podcast: contenido en Spotify para líderes en movimiento
+- Fireside Chats: conversaciones íntimas con referentes internacionales
+- Comunidad: red de líderes, talento y empresas en México y LATAM
 
-FORWARD34: Capa de implementación de Descúbrete+. Para organizaciones que pasan de la conversación a la ejecución.
+AGENTIC: evento especializado en inteligencia artificial agéntica. Para líderes que ya toman decisiones con IA. Speakers de Harvard, MIT y Stanford.
 
-CONTACTO: descubrete.mx/contacto.html
+Contacto: contacto@descubrete.mx | Instagram: @descubrete_mx`;
 
-ESTILO: Respuestas máximo 3 oraciones. Tono cálido, ejecutivo, directo. Responde siempre en español.`;
+    let kairosHistory = [];
+    let kairosMessageCount = 0;
+    let kairosCapturing = false;
+    let kairosOpened = false;
 
-let nepsisHistory=[],nepsisOpen=false,nepsisCapturing=false,nepsisCount=0;
-
-function nepsisToggle(){
-  nepsisOpen=!nepsisOpen;
-  document.getElementById('nepsis-window').classList.toggle('open',nepsisOpen);
-  if(nepsisOpen){
-    document.getElementById('nepsis-badge').style.display='none';
-    if(nepsisHistory.length===0)setTimeout(()=>nepsisAddMsg('nepsis','¡Hola! Soy Népsis. ¿Qué te trajo hoy a Descúbrete+?'),300);
-  }
-}
-
-function nepsisAddMsg(role,text){
-  const c=document.getElementById('nepsis-messages');
-  const d=document.createElement('div');
-  d.className=`n-msg ${role}`;
-  d.textContent=text;
-  c.appendChild(d);
-  c.scrollTop=c.scrollHeight;
-}
-
-function nepsisTyping(){
-  const c=document.getElementById('nepsis-messages');
-  const d=document.createElement('div');
-  d.className='n-typing';d.id='n-typing';
-  d.innerHTML='<div class="n-dot"></div><div class="n-dot"></div><div class="n-dot"></div>';
-  c.appendChild(d);c.scrollTop=c.scrollHeight;
-}
-
-async function nepsisAsk(text){
-  document.getElementById('nepsis-suggestions').style.display='none';
-  nepsisAddMsg('user',text);
-  nepsisHistory.push({role:'user',content:text});
-  nepsisCount++;
-  nepsisTyping();
-  try{
-    const r=await fetch('/api/nepsis',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({messages:nepsisHistory,system:NEPSIS_SYSTEM})
-    });
-    const data=await r.json();
-    const reply=data.content?.[0]?.text||'Hubo un problema. Intenta de nuevo.';
-    document.getElementById('n-typing')?.remove();
-    nepsisAddMsg('nepsis',reply);
-    nepsisHistory.push({role:'assistant',content:reply});
-    if(nepsisCount>=3&&!nepsisCapturing){
-      nepsisCapturing=true;
-      setTimeout(()=>document.getElementById('nepsis-capture').classList.add('show'),800);
+    function kairosToggle() {
+      const win = document.getElementById('kairos-window');
+      const badge = document.getElementById('kairos-badge');
+      if (!win.classList.contains('open')) {
+        win.classList.add('open');
+        badge.style.display = 'none';
+        if (!kairosOpened) {
+          kairosOpened = true;
+          setTimeout(() => kairosAddMsg('kairos', 'Bienvenido. Soy Kairos, guía del ecosistema Descúbrete+. Estoy aquí para orientarle.'), 300);
+        }
+      } else {
+        win.classList.remove('open');
+      }
     }
-  }catch(e){
-    document.getElementById('n-typing')?.remove();
-    nepsisAddMsg('nepsis','Hubo un problema de conexión. Intenta de nuevo.');
-  }
-}
 
-function nepsisSubmit(){
-  const i=document.getElementById('nepsis-input');
-  const t=i.value.trim();
-  if(!t)return;
-  i.value='';nepsisResize(i);nepsisAsk(t);
-}
+    function kairosAddMsg(role, text) {
+      const c = document.getElementById('kairos-messages');
+      const div = document.createElement('div');
+      div.className = 'n-msg ' + role;
+      div.textContent = text;
+      c.appendChild(div);
+      c.scrollTop = c.scrollHeight;
+    }
 
-function nepsisKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();nepsisSubmit();}}
-function nepsisResize(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,80)+'px';}
+    function kairosTyping() {
+      const c = document.getElementById('kairos-messages');
+      const div = document.createElement('div');
+      div.className = 'n-typing'; div.id = 'n-typing';
+      div.innerHTML = '<div class="n-dot"></div><div class="n-dot"></div><div class="n-dot"></div>';
+      c.appendChild(div); c.scrollTop = c.scrollHeight;
+    }
 
-function nepsisCapture(){
-  const nombre=document.getElementById('n-nombre').value.trim();
-  const email=document.getElementById('n-email').value.trim();
-  if(!nombre||!email){alert('Por favor completa tu nombre y email.');return;}
-  document.getElementById('nepsis-capture').innerHTML=`<p style="color:#2a7a2a;font-weight:600;">✓ ¡Listo, ${nombre}! El equipo te contactará pronto.</p>`;
-  nepsisAddMsg('nepsis',`Perfecto, ${nombre}. El equipo estará en contacto contigo en breve.`);
-}
-</script>
+    function kairosRemoveTyping() { const t = document.getElementById('n-typing'); if (t) t.remove(); }
+
+    async function kairosAsk(text) {
+      document.getElementById('kairos-suggestions').style.display = 'none';
+      kairosAddMsg('user', text);
+      kairosHistory.push({ role: 'user', content: text });
+      kairosMessageCount++;
+      kairosTyping();
+      try {
+        const res = await fetch('/api/nepsis', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ messages: kairosHistory, system: KAIROS_SYSTEM })
+        });
+        const data = await res.json();
+        const reply = data.content?.[0]?.text || 'Hubo un problema. Intenta de nuevo.';
+        kairosRemoveTyping();
+        kairosAddMsg('kairos', reply);
+        kairosHistory.push({ role: 'assistant', content: reply });
+        if (kairosMessageCount >= 3 && !kairosCapturing) {
+          kairosCapturing = true;
+          setTimeout(() => document.getElementById('kairos-capture').classList.add('show'), 800);
+        }
+      } catch(e) {
+        kairosRemoveTyping();
+        kairosAddMsg('kairos', 'Hubo un problema de conexión. Intenta de nuevo.');
+      }
+    }
+
+    function kairosSubmit() {
+      const input = document.getElementById('kairos-input');
+      const text = input.value.trim();
+      if (!text) return;
+      input.value = ''; kairosResize(input); kairosAsk(text);
+    }
+
+    function kairosKey(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); kairosSubmit(); } }
+    function kairosResize(el) { el.style.height = 'auto'; el.style.height = Math.min(el.scrollHeight, 80) + 'px'; }
+
+    function kairosCapture() {
+      const nombre = document.getElementById('n-nombre').value.trim();
+      const email = document.getElementById('n-email').value.trim();
+      if (!nombre || !email) { alert('Por favor completa tu nombre y email.'); return; }
+      document.getElementById('kairos-capture').innerHTML = '<p style="color:#2a7a2a;font-weight:600;">✓ ¡Listo, ' + nombre + '! El equipo te contactará pronto.</p>';
+      kairosAddMsg('kairos', 'Gracias, ' + nombre + '. El equipo se pondrá en contacto con usted en breve.');
+      console.log('Lead capturado:', { nombre, email });
+    }
+  </script>
+
 </body>
 </html>
